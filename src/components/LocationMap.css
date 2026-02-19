@@ -1,0 +1,26 @@
+.location-map-wrapper {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  margin-top: 0.75rem;
+}
+
+.location-map-wrapper .leaflet-container {
+  background: var(--bg-card);
+}
+
+.location-map-wrapper .leaflet-popup-content-wrapper {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.location-map-wrapper .leaflet-popup-tip {
+  background: var(--bg-card);
+}
+
+.location-map-wrapper .leaflet-popup-content {
+  margin: 10px 14px;
+  font-size: 0.9rem;
+}

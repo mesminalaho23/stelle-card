@@ -1,0 +1,14 @@
+.agencies-page { width: 100%; min-height: calc(100vh - 70px); background: var(--bg-dark); }
+.agencies-page > .container { padding-top: var(--spacing-lg); padding-bottom: var(--spacing-xl); }
+.agencies-header { display: flex; align-items: center; gap: var(--spacing-lg); margin-bottom: var(--spacing-xl); }
+.agencies-title { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0; }
+.agencies-subtitle { font-size: 0.85rem; color: var(--text-secondary); margin: 0; }
+.agencies-grid { display: grid; grid-template-columns: 1fr; gap: var(--spacing-lg); }
+@media (min-width: 768px) { .agencies-grid { grid-template-columns: repeat(2, 1fr); } }
+.agency-card { background: var(--bg-card); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-color); transition: transform 0.2s ease, border-color 0.2s ease; }
+.agency-card:hover { transform: translateY(-4px); border-color: var(--accent-blue); }
+.agency-img { width: 100%; height: 180px; object-fit: cover; }
+.agency-body { padding: var(--spacing-lg); display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.agency-name { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-bottom: var(--spacing-xs); }
+.agency-info-row { display: flex; align-items: flex-start; gap: var(--spacing-sm); font-size: 0.85rem; color: var(--text-secondary); }
+.agency-icon { color: var(--accent-blue); flex-shrink: 0; margin-top: 2px; }

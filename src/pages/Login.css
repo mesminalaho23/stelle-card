@@ -1,0 +1,131 @@
+.login-page {
+  min-height: calc(100vh - 70px);
+  background: var(--bg-dark);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.auth-content {
+  width: 100%;
+  max-width: 480px;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.auth-back {
+  align-self: flex-start;
+}
+
+.auth-header {
+  text-align: center;
+  padding: var(--spacing-lg) 0;
+}
+
+.auth-title {
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: 0.3rem;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--spacing-sm);
+}
+
+.auth-logo {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  margin: 0 auto var(--spacing-md);
+  display: block;
+}
+
+.auth-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.auth-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.auth-form .form-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.auth-form .btn-primary {
+  margin-top: var(--spacing-md);
+}
+
+.auth-footer {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.auth-footer a {
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile: no card background, just flat */
+@media (max-width: 767px) {
+  .login-page {
+    align-items: flex-start;
+    padding-top: var(--spacing-xl);
+  }
+
+  .auth-content {
+    background: transparent;
+    border: none;
+    padding: var(--spacing-lg) 0;
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .auth-content {
+    padding: var(--spacing-2xl);
+  }
+
+  .auth-title {
+    font-size: 2.25rem;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .auth-content {
+    max-width: 520px;
+    padding: var(--spacing-3xl) var(--spacing-2xl);
+  }
+
+  .auth-title {
+    font-size: 2.5rem;
+  }
+}

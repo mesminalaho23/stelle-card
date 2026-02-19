@@ -1,0 +1,142 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "vehicles": "Véhicules",
+    "favorites": "Favoris",
+    "myRentals": "Mes Locations",
+    "profile": "Profil",
+    "login": "Connexion",
+    "register": "Inscription",
+    "logout": "Déconnexion",
+    "compare": "Comparer"
+  },
+  "home": {
+    "brand": "STELLE CARD",
+    "title": "Louez la voiture de vos rêves",
+    "subtitle": "Des véhicules premium pour tous vos besoins — avec ou sans chauffeur.",
+    "searchPlaceholder": "Où allez-vous ?",
+    "search": "Rechercher",
+    "categories": "Explorez par catégorie",
+    "featured": "Véhicules populaires",
+    "featuredSub": "Découvrez nos véhicules les mieux notés",
+    "seeAll": "Voir tout",
+    "whyUs": "Pourquoi choisir Stelle Card ?"
+  },
+  "vehicles": {
+    "searchPlaceholder": "Rechercher un véhicule...",
+    "found": "véhicule(s) trouvé(s)",
+    "noResults": "Aucun véhicule trouvé",
+    "noResultsSub": "Essayez de modifier vos filtres",
+    "viewDetails": "Voir détails →",
+    "available": "DISPONIBLE",
+    "unavailable": "INDISPONIBLE",
+    "withDriver": "Avec chauffeur disponible",
+    "book": "Réserver",
+    "passengers": "Passagers",
+    "luggage": "Bagages",
+    "doors": "Portes",
+    "reviews": "avis",
+    "equipment": "Équipements",
+    "pricing": "Tarifs",
+    "driverAvailable": "Chauffeur disponible sur demande"
+  },
+  "booking": {
+    "duration": "Durée",
+    "dates": "Dates",
+    "startDate": "Début",
+    "endDate": "Fin",
+    "withDriver": "Avec chauffeur",
+    "driverSurcharge": "+30% du tarif",
+    "total": "Total",
+    "reserve": "Réserver"
+  },
+  "payment": {
+    "summary": "Récapitulatif",
+    "duration": "Durée",
+    "driver": "Chauffeur (+30%)",
+    "from": "Du",
+    "to": "Au",
+    "total": "Total",
+    "pay": "Payer",
+    "cardName": "Nom du titulaire",
+    "cardNumber": "Numéro de carte"
+  },
+  "favorites": {
+    "title": "Mes Favoris",
+    "empty": "Aucun favori",
+    "emptySub": "Appuyez sur ❤️ sur un véhicule pour l'ajouter ici.",
+    "seeVehicles": "Voir les véhicules"
+  },
+  "compare": {
+    "title": "Comparer",
+    "selected": "véhicules sélectionnés",
+    "addVehicle": "Ajouter un véhicule",
+    "chooseVehicle": "Choisir un véhicule",
+    "rating": "Note",
+    "seats": "Places",
+    "day": "Jour",
+    "week": "Semaine",
+    "month": "Mois",
+    "viewDetails": "Voir détails"
+  },
+  "common": {
+    "back": "Retour",
+    "close": "Fermer",
+    "noVehicle": "Aucun véhicule sélectionné",
+    "chooseFirst": "Veuillez d'abord choisir un véhicule.",
+    "seeVehicles": "Voir les véhicules",
+    "day": "Jour",
+    "48h": "48h",
+    "week": "1 Semaine",
+    "month": "1 Mois"
+  },
+  "features": {
+    "fleet": "Flotte récente",
+    "fleetDesc": "Véhicules neufs et entretenus régulièrement pour votre sécurité.",
+    "pricing": "Prix transparents",
+    "pricingDesc": "Aucun frais caché. Le prix affiché est le prix final.",
+    "support": "Support 24/7",
+    "supportDesc": "Assistance disponible à tout moment, partout.",
+    "easyBook": "Réservation facile",
+    "easyBookDesc": "Processus simple et rapide en quelques clics."
+  },
+  "login": {
+    "subtitle": "Connectez-vous pour continuer",
+    "email": "Email",
+    "emailPlaceholder": "votre@email.com",
+    "password": "Mot de passe",
+    "loading": "Connexion...",
+    "submit": "Se connecter",
+    "forgotPassword": "Mot de passe oublié ?",
+    "noAccount": "Pas de compte ?",
+    "signUp": "Inscrivez-vous"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "notifications": "Notifications",
+    "pushNotifs": "Notifications push",
+    "pushNotifsDesc": "Recevoir des alertes sur votre appareil",
+    "emailNotifs": "Notifications email",
+    "emailNotifsDesc": "Confirmations et rappels par email",
+    "promoNotifs": "Offres promotionnelles",
+    "promoNotifsDesc": "Recevoir les bons plans et réductions",
+    "appearance": "Apparence",
+    "darkMode": "Mode sombre",
+    "darkModeDesc": "Adapter l'interface à votre préférence",
+    "security": "Sécurité",
+    "changePassword": "Changer le mot de passe",
+    "data": "Données",
+    "clearData": "Supprimer les données locales",
+    "about": "À propos",
+    "version": "Version",
+    "developedBy": "Développé par"
+  },
+  "footer": {
+    "agencies": "Nos agences",
+    "legal": "CGU & FAQ"
+  },
+  "notFound": {
+    "code": "404",
+    "text": "Page non trouvée"
+  }
+}

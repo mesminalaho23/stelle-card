@@ -1,0 +1,12 @@
+.onboarding { position: fixed; inset: 0; z-index: 10000; background: var(--bg-dark); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
+.onboarding-skip { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: var(--text-secondary); font-size: 0.9rem; cursor: pointer; }
+.onboarding-skip:hover { color: var(--text-primary); }
+.onboarding-slide { text-align: center; animation: fadeIn 0.4s ease-out; }
+.onboarding-emoji { font-size: 5rem; display: block; margin-bottom: 2rem; }
+.onboarding-title { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.75rem; }
+.onboarding-desc { font-size: 1rem; color: var(--text-secondary); max-width: 300px; line-height: 1.6; margin: 0 auto; }
+.onboarding-dots { display: flex; gap: 0.5rem; margin: 2.5rem 0; }
+.onboarding-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--bg-input); transition: all 0.3s ease; }
+.onboarding-dot--active { width: 24px; border-radius: 4px; background: var(--accent-blue); }
+.onboarding-next { padding: 0.875rem 2.5rem; background: linear-gradient(135deg, var(--accent-blue), #1e3a8a); color: white; border: none; border-radius: var(--radius-md); font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+.onboarding-next:hover { transform: translateY(-2px); opacity: 0.9; }

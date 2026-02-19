@@ -1,0 +1,142 @@
+{
+  "nav": {
+    "home": "Home",
+    "vehicles": "Vehicles",
+    "favorites": "Favorites",
+    "myRentals": "My Rentals",
+    "profile": "Profile",
+    "login": "Login",
+    "register": "Sign Up",
+    "logout": "Log Out",
+    "compare": "Compare"
+  },
+  "home": {
+    "brand": "STELLE CARD",
+    "title": "Rent your dream car",
+    "subtitle": "Premium vehicles for all your needs — with or without a driver.",
+    "searchPlaceholder": "Where are you going?",
+    "search": "Search",
+    "categories": "Browse by category",
+    "featured": "Popular vehicles",
+    "featuredSub": "Discover our top-rated vehicles",
+    "seeAll": "See all",
+    "whyUs": "Why choose Stelle Card?"
+  },
+  "vehicles": {
+    "searchPlaceholder": "Search for a vehicle...",
+    "found": "vehicle(s) found",
+    "noResults": "No vehicles found",
+    "noResultsSub": "Try changing your filters",
+    "viewDetails": "View details →",
+    "available": "AVAILABLE",
+    "unavailable": "UNAVAILABLE",
+    "withDriver": "Driver available",
+    "book": "Book",
+    "passengers": "Passengers",
+    "luggage": "Luggage",
+    "doors": "Doors",
+    "reviews": "reviews",
+    "equipment": "Features",
+    "pricing": "Pricing",
+    "driverAvailable": "Driver available on request"
+  },
+  "booking": {
+    "duration": "Duration",
+    "dates": "Dates",
+    "startDate": "Start",
+    "endDate": "End",
+    "withDriver": "With driver",
+    "driverSurcharge": "+30% surcharge",
+    "total": "Total",
+    "reserve": "Book"
+  },
+  "payment": {
+    "summary": "Summary",
+    "duration": "Duration",
+    "driver": "Driver (+30%)",
+    "from": "From",
+    "to": "To",
+    "total": "Total",
+    "pay": "Pay",
+    "cardName": "Cardholder name",
+    "cardNumber": "Card number"
+  },
+  "favorites": {
+    "title": "My Favorites",
+    "empty": "No favorites",
+    "emptySub": "Tap ❤️ on a vehicle to add it here.",
+    "seeVehicles": "Browse vehicles"
+  },
+  "compare": {
+    "title": "Compare",
+    "selected": "vehicles selected",
+    "addVehicle": "Add a vehicle",
+    "chooseVehicle": "Choose a vehicle",
+    "rating": "Rating",
+    "seats": "Seats",
+    "day": "Day",
+    "week": "Week",
+    "month": "Month",
+    "viewDetails": "View details"
+  },
+  "common": {
+    "back": "Back",
+    "close": "Close",
+    "noVehicle": "No vehicle selected",
+    "chooseFirst": "Please choose a vehicle first.",
+    "seeVehicles": "Browse vehicles",
+    "day": "Day",
+    "48h": "48h",
+    "week": "1 Week",
+    "month": "1 Month"
+  },
+  "features": {
+    "fleet": "Recent Fleet",
+    "fleetDesc": "New vehicles regularly maintained for your safety.",
+    "pricing": "Transparent Pricing",
+    "pricingDesc": "No hidden fees. The displayed price is the final price.",
+    "support": "24/7 Support",
+    "supportDesc": "Assistance available anytime, anywhere.",
+    "easyBook": "Easy Booking",
+    "easyBookDesc": "Simple and fast process in just a few clicks."
+  },
+  "login": {
+    "subtitle": "Sign in to continue",
+    "email": "Email",
+    "emailPlaceholder": "your@email.com",
+    "password": "Password",
+    "loading": "Signing in...",
+    "submit": "Sign in",
+    "forgotPassword": "Forgot password?",
+    "noAccount": "No account?",
+    "signUp": "Sign up"
+  },
+  "settings": {
+    "title": "Settings",
+    "notifications": "Notifications",
+    "pushNotifs": "Push Notifications",
+    "pushNotifsDesc": "Receive alerts on your device",
+    "emailNotifs": "Email Notifications",
+    "emailNotifsDesc": "Confirmations and reminders by email",
+    "promoNotifs": "Promotional Offers",
+    "promoNotifsDesc": "Receive deals and discounts",
+    "appearance": "Appearance",
+    "darkMode": "Dark Mode",
+    "darkModeDesc": "Adjust the interface to your preference",
+    "security": "Security",
+    "changePassword": "Change password",
+    "data": "Data",
+    "clearData": "Clear local data",
+    "about": "About",
+    "version": "Version",
+    "developedBy": "Developed by"
+  },
+  "footer": {
+    "agencies": "Our agencies",
+    "legal": "Terms & FAQ"
+  },
+  "notFound": {
+    "code": "404",
+    "text": "Page not found"
+  }
+}

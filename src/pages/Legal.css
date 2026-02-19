@@ -1,0 +1,19 @@
+.legal-page { width: 100%; min-height: calc(100vh - 70px); background: var(--bg-dark); }
+.legal-page > .container { padding-top: var(--spacing-lg); padding-bottom: var(--spacing-xl); }
+.legal-header { display: flex; align-items: center; gap: var(--spacing-lg); margin-bottom: var(--spacing-xl); }
+.legal-title { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0; }
+.legal-tabs { display: flex; gap: var(--spacing-xs); margin-bottom: var(--spacing-xl); overflow-x: auto; }
+.legal-tab { padding: var(--spacing-sm) var(--spacing-lg); background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-full); color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: all 0.2s ease; white-space: nowrap; }
+.legal-tab:hover { color: var(--text-primary); border-color: var(--border-color-hover); }
+.legal-tab--active { background: var(--accent-blue); color: white; border-color: var(--accent-blue); }
+.legal-content { background: var(--bg-card); border-radius: var(--radius-lg); padding: var(--spacing-xl); border: 1px solid var(--border-color); }
+.legal-text h2 { font-size: 1.3rem; color: var(--text-primary); margin-bottom: var(--spacing-lg); }
+.legal-text h3 { font-size: 1rem; color: var(--text-primary); margin-top: var(--spacing-lg); margin-bottom: var(--spacing-sm); }
+.legal-text p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; }
+.faq-list h2 { font-size: 1.3rem; color: var(--text-primary); margin-bottom: var(--spacing-lg); }
+.faq-item { border-bottom: 1px solid var(--border-color); }
+.faq-item:last-child { border-bottom: none; }
+.faq-question { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: var(--spacing-md) 0; background: none; border: none; color: var(--text-primary); font-size: 0.95rem; font-weight: 500; text-align: left; cursor: pointer; gap: var(--spacing-md); }
+.faq-arrow { font-size: 1.2rem; color: var(--accent-blue); flex-shrink: 0; }
+.faq-answer { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.6; padding-bottom: var(--spacing-md); margin: 0; }
+@media (min-width: 1024px) { .legal-page .container { max-width: 800px; margin: 0 auto; } }
