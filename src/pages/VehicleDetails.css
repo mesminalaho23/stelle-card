@@ -265,7 +265,7 @@
 
 .duration-btn.active {
   background: var(--accent-blue);
-  color: var(--text-primary);
+  color: #fff;
   border-color: var(--accent-blue);
 }
 
@@ -299,7 +299,7 @@
   font-weight: 700;
   border-radius: var(--radius-md);
   background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-dark));
-  color: var(--text-primary);
+  color: #fff;
   box-shadow: var(--shadow-md);
   letter-spacing: 0.02em;
   transition: all var(--transition-base);
