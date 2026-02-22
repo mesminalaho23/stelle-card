@@ -509,3 +509,97 @@
   line-height: 1.5;
   margin: 0;
 }
+
+/* ========================================
+   Review Form
+   ======================================== */
+.vd-review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.vd-review-type-toggle {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.vd-review-type-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.vd-review-type-btn:hover {
+  border-color: var(--border-color-hover);
+  color: var(--text-primary);
+}
+
+.vd-review-type-btn--active {
+  background: rgba(74, 123, 255, 0.12);
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
+
+.vd-review-stars-input {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.vd-star-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: 0.15rem;
+  transition: all 0.15s ease;
+  display: flex;
+}
+
+.vd-star-btn:hover {
+  transform: scale(1.2);
+}
+
+.vd-star-btn--active {
+  color: #f59e0b;
+}
+
+.vd-rating-label {
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.vd-review-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.vd-review-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: auto;
+  align-self: flex-start;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.9rem;
+}
+
+.vd-review-type-tag {
+  font-size: 0.7rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  background: rgba(74, 123, 255, 0.1);
+  color: var(--accent-blue);
+  white-space: nowrap;
+}

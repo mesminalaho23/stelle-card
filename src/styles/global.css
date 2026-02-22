@@ -286,6 +286,71 @@ textarea::placeholder {
   color: var(--text-secondary);
 }
 
+/* Date & Time inputs — styled for dark theme */
+input[type="date"],
+input[type="time"],
+input[type="date"].form-input,
+input[type="time"].form-input {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  color-scheme: dark;
+  background: var(--bg-input) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  min-height: 48px;
+}
+
+input[type="date"]:focus,
+input[type="time"]:focus {
+  border-color: var(--accent-blue) !important;
+  box-shadow: 0 0 0 3px rgba(74, 123, 255, 0.15) !important;
+  outline: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.8) sepia(0.2) saturate(5) hue-rotate(190deg);
+  cursor: pointer;
+  opacity: 0.8;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover,
+input[type="time"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+  background: rgba(74, 123, 255, 0.15);
+}
+
+input[type="date"]::-webkit-datetime-edit,
+input[type="time"]::-webkit-datetime-edit {
+  color: var(--text-primary);
+}
+
+input[type="date"]::-webkit-datetime-edit-fields-wrapper,
+input[type="time"]::-webkit-datetime-edit-fields-wrapper {
+  color: var(--text-primary);
+}
+
+[data-theme="light"] input[type="date"],
+[data-theme="light"] input[type="time"] {
+  color-scheme: light;
+  background: var(--bg-input) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="light"] input[type="date"]::-webkit-calendar-picker-indicator,
+[data-theme="light"] input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: none;
+}
+
 .password-field {
   position: relative;
   display: flex;

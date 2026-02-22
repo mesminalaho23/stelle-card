@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { LuSearch, LuStar, LuUsers, LuZap } from 'react-icons/lu';
+import { LuSearch, LuUsers, LuZap } from 'react-icons/lu';
 import { getVehicles, categories } from '../services/vehicleService';
 import './VehicleList.css';
 
@@ -138,12 +138,6 @@ const VehicleList = () => {
                   <span className={`vl-badge vl-badge--${vehicle.category.toLowerCase()}`}>
                     {vehicle.category}
                   </span>
-                  {vehicle.rating && (
-                    <div className="vl-rating">
-                      <LuStar className="vl-star" />
-                      <span>{vehicle.rating}</span>
-                    </div>
-                  )}
                   {!vehicle.available && (
                     <div className="vl-unavailable">Indisponible</div>
                   )}

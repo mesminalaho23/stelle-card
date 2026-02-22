@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { LuUsers, LuZap, LuStar, LuHeart } from 'react-icons/lu';
+import { LuUsers, LuZap, LuHeart } from 'react-icons/lu';
 import { motion } from 'framer-motion';
 import { useFavorites } from '../contexts/FavoritesContext';
 import './VehicleCard.css';
@@ -14,9 +14,7 @@ const VehicleCard = ({ vehicle, index = 0 }) => {
     price,
     specs,
     available,
-    withDriver,
-    rating,
-    reviews
+    withDriver
   } = vehicle;
 
   const { isFavorite, toggleFavorite } = useFavorites();
@@ -43,15 +41,6 @@ const VehicleCard = ({ vehicle, index = 0 }) => {
               </span>
             )}
           </div>
-
-          {/* Rating */}
-          {rating && (
-            <div className="vehicle-rating">
-              <LuStar className="star-icon" />
-              <span>{rating}</span>
-              <span className="reviews-count">({reviews})</span>
-            </div>
-          )}
 
           {/* Favorite */}
           <button
