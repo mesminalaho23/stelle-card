@@ -17,7 +17,8 @@ export const BookingProvider = ({ children }) => {
     withDriver: false,
     startDate: '',
     endDate: '',
-    pickupLocation: ''
+    pickupLocation: '',
+    pickupTime: ''
   });
 
   const setVehicle = (vehicle, duration = '24h') => {
@@ -40,6 +41,10 @@ export const BookingProvider = ({ children }) => {
     setBooking(prev => ({ ...prev, pickupLocation }));
   };
 
+  const setPickupTime = (pickupTime) => {
+    setBooking(prev => ({ ...prev, pickupTime }));
+  };
+
   const clearBooking = () => {
     setBooking({
       vehicle: null,
@@ -47,7 +52,8 @@ export const BookingProvider = ({ children }) => {
       withDriver: false,
       startDate: '',
       endDate: '',
-      pickupLocation: ''
+      pickupLocation: '',
+      pickupTime: ''
     });
   };
 
@@ -67,6 +73,7 @@ export const BookingProvider = ({ children }) => {
     setWithDriver,
     setDates,
     setPickupLocation,
+    setPickupTime,
     clearBooking,
     getTotal
   };

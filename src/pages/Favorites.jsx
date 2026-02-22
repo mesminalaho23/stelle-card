@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { FiHeart, FiArrowLeft } from 'react-icons/fi';
+import { LuHeart, LuArrowLeft } from 'react-icons/lu';
 import { useFavorites } from '../contexts/FavoritesContext';
 import { getVehicleById } from '../services/VehicleService';
 import VehicleCard from '../components/VehicleCard';
@@ -15,7 +15,7 @@ const Favorites = () => {
       <div className="container">
         <div className="favorites-header slide-up">
           <button className="vd-back" onClick={() => navigate(-1)}>
-            <FiArrowLeft />
+            <LuArrowLeft />
           </button>
           <div>
             <h1 className="favorites-title">Mes Favoris</h1>
@@ -31,7 +31,7 @@ const Favorites = () => {
           </div>
         ) : (
           <div className="favorites-empty slide-up">
-            <FiHeart className="favorites-empty-icon" />
+            <LuHeart className="favorites-empty-icon" />
             <h2>Aucun favori</h2>
             <p>Appuyez sur ❤️ sur un véhicule pour l'ajouter ici.</p>
             <button className="btn-primary" onClick={() => navigate('/vehicles')} style={{ width: 'auto', marginTop: '1rem' }}>

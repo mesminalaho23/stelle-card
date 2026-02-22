@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiArrowLeft, FiCalendar, FiClock } from 'react-icons/fi';
+import { LuArrowLeft, LuCalendarDays, LuClock4 } from 'react-icons/lu';
 import { useAuth } from '../contexts/AuthContext';
 import { bookingService } from '../services/Bookingservice';
 import './MyBookings.css';
@@ -29,7 +29,7 @@ export default function MyBookings() {
       <div className="container">
         <div className="mb-header slide-up">
           <button className="vd-back" onClick={() => navigate(-1)}>
-            <FiArrowLeft />
+            <LuArrowLeft />
           </button>
           <div>
             <h1 className="mb-title">Mes Réservations</h1>
@@ -52,8 +52,8 @@ export default function MyBookings() {
                       <span className={`booking-status booking-status--${status.color}`}>{status.label}</span>
                     </div>
                     <div className="booking-meta">
-                      <span><FiClock size={14} /> {bookingService.getDurationLabel(booking.duration)}</span>
-                      {booking.startDate && <span><FiCalendar size={14} /> {new Date(booking.startDate).toLocaleDateString('fr-FR')}</span>}
+                      <span><LuClock4 size={14} /> {bookingService.getDurationLabel(booking.duration)}</span>
+                      {booking.startDate && <span><LuCalendarDays size={14} /> {new Date(booking.startDate).toLocaleDateString('fr-FR')}</span>}
                     </div>
                     {booking.withDriver && <span className="booking-driver-tag">🚗 Avec chauffeur</span>}
                     <div className="booking-card-footer">

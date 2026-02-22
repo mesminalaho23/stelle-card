@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FiSearch, FiMapPin, FiCalendar, FiArrowRight, FiShield, FiClock, FiDollarSign, FiCheckCircle } from 'react-icons/fi';
+import { LuSearch, LuMapPin, LuCalendarDays, LuArrowRight, LuShieldCheck, LuClock4, LuBadgeDollarSign, LuCheckCircle } from 'react-icons/lu';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import VehicleCard from '../components/VehicleCard';
@@ -41,22 +41,22 @@ const Home = () => {
 
   const features = [
     {
-      icon: <FiShield />,
+      icon: <LuShieldCheck />,
       title: t('features.fleet'),
       desc: t('features.fleetDesc')
     },
     {
-      icon: <FiDollarSign />,
+      icon: <LuBadgeDollarSign />,
       title: t('features.pricing'),
       desc: t('features.pricingDesc')
     },
     {
-      icon: <FiClock />,
+      icon: <LuClock4 />,
       title: t('features.support'),
       desc: t('features.supportDesc')
     },
     {
-      icon: <FiCheckCircle />,
+      icon: <LuCheckCircle />,
       title: t('features.easyBook'),
       desc: t('features.easyBookDesc')
     }
@@ -90,7 +90,7 @@ const Home = () => {
               custom={1}
             >
               <div className="search-field">
-                <FiMapPin className="field-icon" />
+                <LuMapPin className="field-icon" />
                 <input
                   type="text"
                   placeholder={t('home.searchPlaceholder')}
@@ -100,7 +100,7 @@ const Home = () => {
               </div>
 
               <div className="search-field">
-                <FiCalendar className="field-icon" />
+                <LuCalendarDays className="field-icon" />
                 <input
                   type="date"
                   placeholder="Date de début"
@@ -110,7 +110,7 @@ const Home = () => {
               </div>
 
               <div className="search-field">
-                <FiCalendar className="field-icon" />
+                <LuCalendarDays className="field-icon" />
                 <input
                   type="date"
                   placeholder="Date de fin"
@@ -120,7 +120,7 @@ const Home = () => {
               </div>
 
               <button type="submit" className="search-btn">
-                <FiSearch />
+                <LuSearch />
                 <span>{t('home.search')}</span>
               </button>
             </motion.form>
@@ -157,7 +157,7 @@ const Home = () => {
                 >
                   <span className="category-icon">{category.icon}</span>
                   <h3 className="category-label">{category.label}</h3>
-                  <FiArrowRight className="category-arrow" />
+                  <LuArrowRight className="category-arrow" />
                 </Link>
               </motion.div>
             ))}
@@ -181,7 +181,7 @@ const Home = () => {
               </div>
               <Link to="/vehicles" className="see-all-btn">
                 {t('home.seeAll')}
-                <FiArrowRight />
+                <LuArrowRight />
               </Link>
             </div>
 

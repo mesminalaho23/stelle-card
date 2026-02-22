@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { FiSearch, FiStar, FiUsers, FiZap } from 'react-icons/fi';
+import { LuSearch, LuStar, LuUsers, LuZap } from 'react-icons/lu';
 import { getVehicles, categories } from '../services/vehicleService';
 import './VehicleList.css';
 
@@ -48,7 +48,7 @@ const VehicleList = () => {
       <div className="container">
         {/* Search Bar */}
         <div className="search-bar slide-up">
-          <FiSearch className="search-bar-icon" />
+          <LuSearch className="search-bar-icon" />
           <input
             type="text"
             placeholder="Rechercher un véhicule..."
@@ -140,7 +140,7 @@ const VehicleList = () => {
                   </span>
                   {vehicle.rating && (
                     <div className="vl-rating">
-                      <FiStar className="vl-star" />
+                      <LuStar className="vl-star" />
                       <span>{vehicle.rating}</span>
                     </div>
                   )}
@@ -152,8 +152,8 @@ const VehicleList = () => {
                   <h3 className="vl-card-name">{vehicle.name}</h3>
                   <p className="vl-card-type">{vehicle.type}</p>
                   <div className="vl-card-specs">
-                    <span><FiUsers size={14} /> {vehicle.specs.passengers}</span>
-                    <span><FiZap size={14} /> {vehicle.specs.transmission}</span>
+                    <span><LuUsers size={14} /> {vehicle.specs.passengers}</span>
+                    <span><LuZap size={14} /> {vehicle.specs.transmission}</span>
                   </div>
                   <div className="vl-card-footer">
                     <div className="vl-card-price">

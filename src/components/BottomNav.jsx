@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { FiHome, FiTruck, FiHeart, FiUser } from 'react-icons/fi';
+import { LuHome, LuCar, LuHeart, LuUser } from 'react-icons/lu';
 import { useTranslation } from 'react-i18next';
 import './BottomNav.css';
 
@@ -8,10 +8,10 @@ const BottomNav = () => {
   const { pathname } = useLocation();
 
   const tabs = [
-    { path: '/', icon: FiHome, label: t('nav.home') },
-    { path: '/vehicles', icon: FiTruck, label: t('nav.vehicles') },
-    { path: '/favorites', icon: FiHeart, label: t('nav.favorites') },
-    { path: '/profile', icon: FiUser, label: t('nav.profile') }
+    { path: '/', icon: LuHome, label: t('nav.home') },
+    { path: '/vehicles', icon: LuCar, label: t('nav.vehicles') },
+    { path: '/favorites', icon: LuHeart, label: t('nav.favorites') },
+    { path: '/profile', icon: LuUser, label: t('nav.profile') }
   ];
 
   return (

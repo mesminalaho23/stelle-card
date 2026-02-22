@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FiUsers, FiZap, FiStar, FiHeart } from 'react-icons/fi';
+import { LuUsers, LuZap, LuStar, LuHeart } from 'react-icons/lu';
 import { motion } from 'framer-motion';
 import { useFavorites } from '../contexts/FavoritesContext';
 import './VehicleCard.css';
@@ -47,7 +47,7 @@ const VehicleCard = ({ vehicle, index = 0 }) => {
           {/* Rating */}
           {rating && (
             <div className="vehicle-rating">
-              <FiStar className="star-icon" />
+              <LuStar className="star-icon" />
               <span>{rating}</span>
               <span className="reviews-count">({reviews})</span>
             </div>
@@ -58,7 +58,7 @@ const VehicleCard = ({ vehicle, index = 0 }) => {
             className={`vc-fav-btn ${isFavorite(id) ? 'vc-fav-btn--active' : ''}`}
             onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleFavorite(id); }}
           >
-            <FiHeart />
+            <LuHeart />
           </button>
         </div>
 
@@ -72,11 +72,11 @@ const VehicleCard = ({ vehicle, index = 0 }) => {
           {/* Specs */}
           <div className="vehicle-specs">
             <div className="spec-item">
-              <FiUsers className="spec-icon" />
+              <LuUsers className="spec-icon" />
               <span>{specs.passengers} places</span>
             </div>
             <div className="spec-item">
-              <FiZap className="spec-icon" />
+              <LuZap className="spec-icon" />
               <span>{specs.transmission}</span>
             </div>
           </div>

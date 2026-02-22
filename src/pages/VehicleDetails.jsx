@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { FiArrowLeft, FiHeart, FiStar, FiUsers, FiPackage, FiSettings, FiDroplet, FiNavigation, FiShare2 } from 'react-icons/fi';
+import { LuArrowLeft, LuHeart, LuStar, LuUsers, LuBriefcase, LuCog, LuDroplets, LuNavigation, LuShare2 } from 'react-icons/lu';
 import { getVehicleById, getVehicleReviews } from '../services/vehicleService';
 import { useBooking } from '../contexts/BookingContext';
 import { useFavorites } from '../contexts/FavoritesContext';
@@ -40,11 +40,11 @@ const VehicleDetails = () => {
   }
 
   const specItems = [
-    { icon: <FiUsers />, label: `${vehicle.specs.passengers} Passagers` },
-    { icon: <FiPackage />, label: `${vehicle.specs.luggage} Bagages` },
-    { icon: <FiSettings />, label: vehicle.specs.transmission },
-    { icon: <FiDroplet />, label: vehicle.specs.fuel },
-    { icon: <FiNavigation />, label: `${vehicle.specs.doors} Portes` }
+    { icon: <LuUsers />, label: `${vehicle.specs.passengers} Passagers` },
+    { icon: <LuBriefcase />, label: `${vehicle.specs.luggage} Bagages` },
+    { icon: <LuCog />, label: vehicle.specs.transmission },
+    { icon: <LuDroplets />, label: vehicle.specs.fuel },
+    { icon: <LuNavigation />, label: `${vehicle.specs.doors} Portes` }
   ];
 
   return (
@@ -53,7 +53,7 @@ const VehicleDetails = () => {
         {/* Back + Favorite Header */}
         <div className="vd-header slide-up">
           <button className="vd-back" onClick={() => navigate(-1)}>
-            <FiArrowLeft />
+            <LuArrowLeft />
           </button>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <button className="vd-fav" onClick={() => {
@@ -64,10 +64,10 @@ const VehicleDetails = () => {
                 import('react-hot-toast').then(m => m.default.success('Lien copié !'));
               }
             }}>
-              <FiShare2 />
+              <LuShare2 />
             </button>
             <button className={`vd-fav ${isFavorite(vehicle.id) ? 'vd-fav--active' : ''}`} onClick={() => toggleFavorite(vehicle.id)}>
-              <FiHeart />
+              <LuHeart />
             </button>
           </div>
         </div>
@@ -94,7 +94,7 @@ const VehicleDetails = () => {
               </div>
               {vehicle.rating && (
                 <div className="vd-rating">
-                  <FiStar className="vd-star" />
+                  <LuStar className="vd-star" />
                   <span className="vd-rating-num">{vehicle.rating}</span>
                   <span className="vd-rating-count">({vehicle.reviews} avis)</span>
                 </div>
@@ -144,7 +144,7 @@ const VehicleDetails = () => {
                         </div>
                         <div className="vd-review-stars">
                           {[...Array(5)].map((_, i) => (
-                            <FiStar key={i} className={i < review.rating ? 'vd-star-filled' : 'vd-star-empty'} />
+                            <LuStar key={i} className={i < review.rating ? 'vd-star-filled' : 'vd-star-empty'} />
                           ))}
                         </div>
                       </div>

@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiArrowLeft, FiGlobe } from 'react-icons/fi';
+import { LuArrowLeft, LuGlobe } from 'react-icons/lu';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
-import { FiCamera } from 'react-icons/fi';
+import { LuCamera } from 'react-icons/lu';
 import './Profile.css';
 
 const languages = [
@@ -85,7 +85,7 @@ const Profile = () => {
                 <span className="avatar-initials">{getInitials()}</span>
               )}
               <div className="avatar-overlay">
-                <FiCamera />
+                <LuCamera />
               </div>
             </div>
             <input

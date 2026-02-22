@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { FiEye, FiEyeOff, FiArrowLeft } from 'react-icons/fi';
+import { LuEye, LuEyeOff, LuArrowLeft } from 'react-icons/lu';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
 import logoImg from '../assets/Logo Stelle Card.png';
@@ -27,7 +27,7 @@ const Login = () => {
     <div className="login-page">
         <div className="auth-content slide-up">
         <button className="vd-back auth-back" onClick={() => navigate(-1)}>
-          <FiArrowLeft />
+          <LuArrowLeft />
         </button>
         <div className="auth-header">
           <img src={logoImg} alt="Stelle Card" className="auth-logo" />
@@ -44,7 +44,7 @@ const Login = () => {
             <div className="password-field">
               <input type={showPwd ? 'text' : 'password'} placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} required />
               <button type="button" className="password-toggle" onClick={() => setShowPwd(!showPwd)}>
-                {showPwd ? <FiEyeOff /> : <FiEye />}
+                {showPwd ? <LuEyeOff /> : <LuEye />}
               </button>
             </div>
           </div>

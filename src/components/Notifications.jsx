@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FiBell, FiX } from 'react-icons/fi';
+import { LuBell, LuX } from 'react-icons/lu';
 import './Notifications.css';
 
 const defaultNotifs = [
@@ -24,7 +24,7 @@ const Notifications = () => {
   return (
     <div className="notif-wrapper">
       <button className="notif-bell" onClick={() => { setIsOpen(!isOpen); if (!isOpen) markAllRead(); }}>
-        <FiBell />
+        <LuBell />
         {unreadCount > 0 && <span className="notif-badge">{unreadCount}</span>}
       </button>
       {isOpen && (
@@ -33,7 +33,7 @@ const Notifications = () => {
           <div className="notif-panel slide-up">
             <div className="notif-panel-header">
               <h3>Notifications</h3>
-              <button onClick={() => setIsOpen(false)}><FiX /></button>
+              <button onClick={() => setIsOpen(false)}><LuX /></button>
             </div>
             {notifs.length > 0 ? (
               <div className="notif-list">
@@ -44,7 +44,7 @@ const Notifications = () => {
                       <p>{n.message}</p>
                       <span className="notif-time">{n.time}</span>
                     </div>
-                    <button className="notif-remove" onClick={() => removeNotif(n.id)}><FiX size={14} /></button>
+                    <button className="notif-remove" onClick={() => removeNotif(n.id)}><LuX size={14} /></button>
                   </div>
                 ))}
               </div>

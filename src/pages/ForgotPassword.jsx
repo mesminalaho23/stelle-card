@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FiArrowLeft } from 'react-icons/fi';
+import { LuArrowLeft } from 'react-icons/lu';
 import logoImg from '../assets/Logo Stelle Card.png';
 import toast from 'react-hot-toast';
 import './Login.css';
@@ -20,7 +20,7 @@ const ForgotPassword = () => {
     <div className="login-page">
       <div className="auth-content slide-up">
         <button className="vd-back auth-back" onClick={() => navigate(-1)}>
-          <FiArrowLeft />
+          <LuArrowLeft />
         </button>
         <div className="auth-header">
           <img src={logoImg} alt="Stelle Card" className="auth-logo" />

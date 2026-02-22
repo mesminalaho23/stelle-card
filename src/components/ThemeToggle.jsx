@@ -1,4 +1,4 @@
-import { FiSun, FiMoon } from 'react-icons/fi';
+import { LuSun, LuMoon } from 'react-icons/lu';
 import { useTheme } from '../contexts/ThemeContext';
 import './ThemeToggle.css';
 
@@ -11,7 +11,7 @@ const ThemeToggle = () => {
       onClick={toggleTheme}
       aria-label={isDark ? 'Mode clair' : 'Mode sombre'}
     >
-      {isDark ? <FiSun /> : <FiMoon />}
+      {isDark ? <LuSun /> : <LuMoon />}
     </button>
   );
 };

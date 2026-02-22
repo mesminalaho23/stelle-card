@@ -1,10 +1,10 @@
 import { useState, useMemo, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  FiArrowLeft, FiPlus, FiTrash2, FiTruck, FiList, FiMapPin,
-  FiCheck, FiX, FiEdit2, FiUsers, FiBarChart2, FiTag, FiCalendar,
-  FiDownload, FiSearch, FiFilter, FiHome, FiPhone, FiClock, FiImage
-} from 'react-icons/fi';
+  LuArrowLeft, LuPlus, LuTrash2, LuCar, LuList, LuMapPin,
+  LuCheck, LuX, LuPencil, LuUsers, LuBarChart2, LuTag, LuCalendarDays,
+  LuDownload, LuSearch, LuFilter, LuHome, LuPhone, LuClock4, LuImage
+} from 'react-icons/lu';
 import toast from 'react-hot-toast';
 import { addCustomVehicle, deleteAnyVehicle, updateVehicle, getCustomVehicles, vehiclesData, categories } from '../services/VehicleService';
 import { bookingService } from '../services/Bookingservice';
@@ -363,14 +363,14 @@ const Admin = () => {
   }, [calendarMonth, allBookings]);
 
   const tabs = [
-    { id: 'analytics', label: 'Analytics', icon: <FiBarChart2 /> },
-    { id: 'vehicles', label: 'Véhicules', icon: <FiTruck /> },
-    { id: 'bookings', label: 'Réservations', icon: <FiList /> },
-    { id: 'users', label: 'Utilisateurs', icon: <FiUsers /> },
-    { id: 'promos', label: 'Promos', icon: <FiTag /> },
-    { id: 'agencies', label: 'Agences', icon: <FiHome /> },
-    { id: 'calendar', label: 'Calendrier', icon: <FiCalendar /> },
-    { id: 'tracking', label: 'Suivi', icon: <FiMapPin /> }
+    { id: 'analytics', label: 'Analytics', icon: <LuBarChart2 /> },
+    { id: 'vehicles', label: 'Véhicules', icon: <LuCar /> },
+    { id: 'bookings', label: 'Réservations', icon: <LuList /> },
+    { id: 'users', label: 'Utilisateurs', icon: <LuUsers /> },
+    { id: 'promos', label: 'Promos', icon: <LuTag /> },
+    { id: 'agencies', label: 'Agences', icon: <LuHome /> },
+    { id: 'calendar', label: 'Calendrier', icon: <LuCalendarDays /> },
+    { id: 'tracking', label: 'Suivi', icon: <LuMapPin /> }
   ];
 
   const totalRevenue = allBookings.reduce((sum, b) => sum + (b.total || 0), 0);
@@ -379,7 +379,7 @@ const Admin = () => {
     <div className="admin-page">
       <div className="container">
         <div className="admin-header slide-up">
-          <button className="vd-back" onClick={() => navigate(-1)}><FiArrowLeft /></button>
+          <button className="vd-back" onClick={() => navigate(-1)}><LuArrowLeft /></button>
           <div>
             <h1 className="admin-title">Administration</h1>
             <p className="admin-subtitle">Tableau de bord</p>
@@ -467,7 +467,7 @@ const Admin = () => {
         {activeTab === 'vehicles' && (
           <>
             <button className="admin-add-btn slide-up" onClick={() => { setShowForm(!showForm); setEditingId(null); setForm({ ...emptyForm }); }}>
-              <FiPlus />
+              <LuPlus />
               <span>{showForm ? 'Annuler' : 'Ajouter un véhicule'}</span>
             </button>
 
@@ -552,8 +552,8 @@ const Admin = () => {
                       <strong>{v.name}</strong>
                       <span>{v.category} — {v.price['24h']}€/jour</span>
                     </div>
-                    <button className="admin-edit-btn" onClick={() => handleEdit(v)}><FiEdit2 /></button>
-                    <button className="admin-delete-btn" onClick={() => handleDelete(v.id, v.name)}><FiTrash2 /></button>
+                    <button className="admin-edit-btn" onClick={() => handleEdit(v)}><LuPencil /></button>
+                    <button className="admin-delete-btn" onClick={() => handleDelete(v.id, v.name)}><LuTrash2 /></button>
                   </div>
                 ))}
               </div>
@@ -568,7 +568,7 @@ const Admin = () => {
           <div className="admin-bookings slide-up">
             <div className="admin-bookings-toolbar">
               <div className="admin-search-bar">
-                <FiSearch />
+                <LuSearch />
                 <input type="text" placeholder="Rechercher..." value={bookingSearch} onChange={e => setBookingSearch(e.target.value)} />
               </div>
               <div className="admin-filter-row">
@@ -582,7 +582,7 @@ const Admin = () => {
                 </select>
                 <input type="date" className="form-input admin-filter-date" value={bookingDateFrom} onChange={e => setBookingDateFrom(e.target.value)} />
                 <input type="date" className="form-input admin-filter-date" value={bookingDateTo} onChange={e => setBookingDateTo(e.target.value)} />
-                <button className="admin-export-btn" onClick={exportCSV}><FiDownload /> CSV</button>
+                <button className="admin-export-btn" onClick={exportCSV}><LuDownload /> CSV</button>
               </div>
             </div>
 
@@ -614,10 +614,10 @@ const Admin = () => {
                         {b.status === 'pending' && (
                           <>
                             <button className="admin-action-btn admin-action-btn--confirm" onClick={() => handleStatusChange(b.id, 'confirmed')}>
-                              <FiCheck /> Confirmer
+                              <LuCheck /> Confirmer
                             </button>
                             <button className="admin-action-btn admin-action-btn--cancel" onClick={() => handleStatusChange(b.id, 'cancelled')}>
-                              <FiX /> Refuser
+                              <LuX /> Refuser
                             </button>
                           </>
                         )}
@@ -632,7 +632,7 @@ const Admin = () => {
                           </button>
                         )}
                         <button className="admin-action-btn admin-action-btn--delete" onClick={() => handleDeleteBooking(b.id)}>
-                          <FiTrash2 />
+                          <LuTrash2 />
                         </button>
                       </div>
                     </div>
@@ -669,7 +669,7 @@ const Admin = () => {
                         {u.blocked ? '🔓 Débloquer' : '🔒 Bloquer'}
                       </button>
                       <button className="admin-action-btn admin-action-btn--delete" onClick={() => handleDeleteUser(u.id)}>
-                        <FiTrash2 />
+                        <LuTrash2 />
                       </button>
                     </div>
                   </div>
@@ -687,7 +687,7 @@ const Admin = () => {
         {activeTab === 'promos' && (
           <div className="admin-promos slide-up">
             <button className="admin-add-btn" onClick={() => setShowPromoForm(!showPromoForm)}>
-              <FiPlus />
+              <LuPlus />
               <span>{showPromoForm ? 'Annuler' : 'Créer un code promo'}</span>
             </button>
 
@@ -747,7 +747,7 @@ const Admin = () => {
                         {p.active ? 'Désactiver' : 'Activer'}
                       </button>
                       <button className="admin-action-btn admin-action-btn--delete" onClick={() => handleDeletePromo(p.id)}>
-                        <FiTrash2 />
+                        <LuTrash2 />
                       </button>
                     </div>
                   </div>
@@ -772,36 +772,36 @@ const Admin = () => {
                   <form className="admin-agency-form" onSubmit={handleAgencySubmit}>
                     <div className="admin-agency-form-row">
                       <div className="form-group" style={{ flex: 2 }}>
-                        <label className="form-label"><FiHome size={13} /> Nom</label>
+                        <label className="form-label"><LuHome size={13} /> Nom</label>
                         <input className="form-input" value={agencyForm.name} onChange={e => setAgencyForm(p => ({ ...p, name: e.target.value }))} required />
                       </div>
                       <div className="form-group" style={{ flex: 3 }}>
-                        <label className="form-label"><FiMapPin size={13} /> Adresse</label>
+                        <label className="form-label"><LuMapPin size={13} /> Adresse</label>
                         <input className="form-input" value={agencyForm.address} onChange={e => setAgencyForm(p => ({ ...p, address: e.target.value }))} />
                       </div>
                     </div>
                     <div className="admin-agency-form-row">
                       <div className="form-group" style={{ flex: 1 }}>
-                        <label className="form-label"><FiPhone size={13} /> Téléphone</label>
+                        <label className="form-label"><LuPhone size={13} /> Téléphone</label>
                         <input className="form-input" value={agencyForm.phone} onChange={e => setAgencyForm(p => ({ ...p, phone: e.target.value }))} />
                       </div>
                       <div className="form-group" style={{ flex: 1 }}>
-                        <label className="form-label"><FiClock size={13} /> Horaires</label>
+                        <label className="form-label"><LuClock4 size={13} /> Horaires</label>
                         <input className="form-input" value={agencyForm.hours} onChange={e => setAgencyForm(p => ({ ...p, hours: e.target.value }))} placeholder="Lun-Sam: 8h-20h" />
                       </div>
                     </div>
                     <div className="form-group">
-                      <label className="form-label"><FiImage size={13} /> Photo</label>
+                      <label className="form-label"><LuImage size={13} /> Photo</label>
                       <input type="file" accept="image/*" className="form-input" onChange={handleAgencyImageUpload} />
                       <input className="form-input" value={agencyForm.image} onChange={e => setAgencyForm(p => ({ ...p, image: e.target.value }))} placeholder="ou URL de l'image" style={{ marginTop: '0.5rem' }} />
                     </div>
                     {agencyForm.image && <img src={agencyForm.image} alt="Preview" className="admin-agency-preview" />}
                     <div className="admin-agency-form-actions">
                       <button type="submit" className="admin-action-btn admin-action-btn--confirm">
-                        <FiCheck /> Enregistrer
+                        <LuCheck /> Enregistrer
                       </button>
                       <button type="button" className="admin-action-btn admin-action-btn--cancel" onClick={handleCancelAgencyEdit}>
-                        <FiX /> Annuler
+                        <LuX /> Annuler
                       </button>
                     </div>
                   </form>
@@ -810,13 +810,13 @@ const Admin = () => {
                     <img src={a.image} alt={a.name} className="admin-agency-img" />
                     <div className="admin-agency-info">
                       <strong>{a.name}</strong>
-                      <span><FiMapPin size={12} /> {a.address}</span>
-                      <span><FiPhone size={12} /> {a.phone}</span>
-                      <span><FiClock size={12} /> {a.hours}</span>
+                      <span><LuMapPin size={12} /> {a.address}</span>
+                      <span><LuPhone size={12} /> {a.phone}</span>
+                      <span><LuClock4 size={12} /> {a.hours}</span>
                     </div>
                     <div className="admin-agency-actions">
-                      <button className="admin-edit-btn" onClick={() => handleEditAgency(a)}><FiEdit2 /></button>
-                      <button className="admin-delete-btn" onClick={() => handleDeleteAgency(a.id)}><FiTrash2 /></button>
+                      <button className="admin-edit-btn" onClick={() => handleEditAgency(a)}><LuPencil /></button>
+                      <button className="admin-delete-btn" onClick={() => handleDeleteAgency(a.id)}><LuTrash2 /></button>
                     </div>
                   </div>
                 )}
@@ -825,7 +825,7 @@ const Admin = () => {
 
             {!editingAgency && (
               <button className="admin-add-btn" style={{ marginTop: '1rem' }} onClick={() => { setEditingAgency('new'); setAgencyForm({ name: '', address: '', phone: '', hours: '', image: '' }); }}>
-                <FiPlus /> Ajouter une agence
+                <LuPlus /> Ajouter une agence
               </button>
             )}
 
@@ -846,7 +846,7 @@ const Admin = () => {
                 </div>
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
                   <button type="submit" className="btn-primary">Ajouter</button>
-                  <button type="button" className="admin-action-btn admin-action-btn--cancel" onClick={handleCancelAgencyEdit}><FiX /> Annuler</button>
+                  <button type="button" className="admin-action-btn admin-action-btn--cancel" onClick={handleCancelAgencyEdit}><LuX /> Annuler</button>
                 </div>
               </form>
             )}

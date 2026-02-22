@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiArrowLeft, FiX, FiPlus, FiStar, FiUsers, FiPackage, FiSettings, FiDroplet } from 'react-icons/fi';
+import { LuArrowLeft, LuX, LuPlus, LuStar, LuUsers, LuBriefcase, LuCog, LuDroplets } from 'react-icons/lu';
 import { vehiclesData } from '../services/VehicleService';
 import './Compare.css';
 
@@ -28,7 +28,7 @@ const Compare = () => {
       <div className="container">
         <div className="compare-header slide-up">
           <button className="vd-back" onClick={() => navigate(-1)}>
-            <FiArrowLeft />
+            <LuArrowLeft />
           </button>
           <div>
             <h1 className="compare-title">Comparer</h1>
@@ -41,7 +41,7 @@ const Compare = () => {
           {selectedVehicles.map(vehicle => (
             <div key={vehicle.id} className="compare-card">
               <button className="compare-remove" onClick={() => removeVehicle(vehicle.id)}>
-                <FiX />
+                <LuX />
               </button>
               <img src={vehicle.image} alt={vehicle.name} className="compare-img" />
               <h3 className="compare-name">{vehicle.name}</h3>
@@ -49,23 +49,23 @@ const Compare = () => {
 
               <div className="compare-specs">
                 <div className="compare-spec-row">
-                  <span className="compare-spec-label"><FiStar /> Note</span>
+                  <span className="compare-spec-label"><LuStar /> Note</span>
                   <span className="compare-spec-value">{vehicle.rating}/5</span>
                 </div>
                 <div className="compare-spec-row">
-                  <span className="compare-spec-label"><FiUsers /> Places</span>
+                  <span className="compare-spec-label"><LuUsers /> Places</span>
                   <span className="compare-spec-value">{vehicle.specs.passengers}</span>
                 </div>
                 <div className="compare-spec-row">
-                  <span className="compare-spec-label"><FiPackage /> Bagages</span>
+                  <span className="compare-spec-label"><LuBriefcase /> Bagages</span>
                   <span className="compare-spec-value">{vehicle.specs.luggage}</span>
                 </div>
                 <div className="compare-spec-row">
-                  <span className="compare-spec-label"><FiSettings /> Transmission</span>
+                  <span className="compare-spec-label"><LuCog /> Transmission</span>
                   <span className="compare-spec-value">{vehicle.specs.transmission}</span>
                 </div>
                 <div className="compare-spec-row">
-                  <span className="compare-spec-label"><FiDroplet /> Carburant</span>
+                  <span className="compare-spec-label"><LuDroplets /> Carburant</span>
                   <span className="compare-spec-value">{vehicle.specs.fuel}</span>
                 </div>
               </div>
@@ -103,7 +103,7 @@ const Compare = () => {
           {/* Add vehicle slot */}
           {selectedIds.length < 3 && (
             <button className="compare-add-slot" onClick={() => setShowPicker(true)}>
-              <FiPlus />
+              <LuPlus />
               <span>Ajouter un véhicule</span>
             </button>
           )}
@@ -117,7 +117,7 @@ const Compare = () => {
               <div className="compare-picker-header">
                 <h3>Choisir un véhicule</h3>
                 <button className="vd-back" onClick={() => setShowPicker(false)}>
-                  <FiX />
+                  <LuX />
                 </button>
               </div>
               <div className="compare-picker-list">

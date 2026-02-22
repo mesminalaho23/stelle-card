@@ -133,16 +133,43 @@ const searchLocations = (query) => {
 const searchAddressOnline = async (query) => {
   if (!query || query.length < 3) return [];
   try {
+    const params = new URLSearchParams({
+      format: 'json',
+      q: query,
+      limit: '10',
+      addressdetails: '1',
+      'accept-language': 'fr',
+      dedupe: '1',
+      layer: 'address,poi',
+      countrycodes: 'cm,fr,ci,ga',
+      bounded: '0',
+      viewbox: '1.5,13.5,16.5,1.5',
+    });
     const res = await fetch(
-      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=6&addressdetails=1`,
-      { headers: { 'Accept-Language': 'fr' } }
+      `https://nominatim.openstreetmap.org/search?${params}`,
+      { headers: { 'Accept-Language': 'fr', 'User-Agent': 'StelleCard/1.0' } }
     );
     const data = await res.json();
-    return data.map(item => ({
-      name: item.display_name,
-      lat: parseFloat(item.lat),
-      lng: parseFloat(item.lon),
-    }));
+    return data.map(item => {
+      const a = item.address || {};
+      const parts = [
+        a.house_number,
+        a.road,
+        a.suburb || a.neighbourhood || a.quarter,
+        a.city || a.town || a.village || a.municipality,
+        a.county || a.state_district,
+        a.state,
+        a.postcode,
+        a.country
+      ].filter(Boolean);
+      return {
+        name: parts.join(', ') || item.display_name,
+        fullName: item.display_name,
+        lat: parseFloat(item.lat),
+        lng: parseFloat(item.lon),
+        type: item.type,
+      };
+    });
   } catch {
     return searchLocations(query);
   }

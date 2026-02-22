@@ -1,4 +1,4 @@
-import { FiAlertTriangle, FiCheck, FiX } from 'react-icons/fi';
+import { LuAlertTriangle, LuCheck, LuX } from 'react-icons/lu';
 import { motion, AnimatePresence } from 'framer-motion';
 import './ConfirmModal.css';
 
@@ -18,13 +18,13 @@ const ConfirmModal = ({ isOpen, title, message, icon, confirmLabel = 'Confirmer'
             onClick={e => e.stopPropagation()}
           >
             <div className={`confirm-icon-circle confirm-icon-circle--${variant}`}>
-              {icon || (variant === 'danger' ? <FiAlertTriangle size={28} /> : <FiCheck size={28} />)}
+              {icon || (variant === 'danger' ? <LuAlertTriangle size={28} /> : <LuCheck size={28} />)}
             </div>
             <h3 className="confirm-title">{title}</h3>
             {message && <p className="confirm-message">{message}</p>}
             <div className="confirm-actions">
               <button className="confirm-btn confirm-btn--cancel" onClick={onCancel}>
-                <FiX size={16} />
+                <LuX size={16} />
                 {cancelLabel}
               </button>
               <button className={`confirm-btn confirm-btn--${variant}`} onClick={onConfirm}>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiArrowLeft } from 'react-icons/fi';
+import { LuArrowLeft } from 'react-icons/lu';
 import './Legal.css';
 
 const faqItems = [
@@ -21,7 +21,7 @@ const Legal = () => {
     <div className="legal-page">
       <div className="container">
         <div className="legal-header slide-up">
-          <button className="vd-back" onClick={() => navigate(-1)}><FiArrowLeft /></button>
+          <button className="vd-back" onClick={() => navigate(-1)}><LuArrowLeft /></button>
           <h1 className="legal-title">Informations légales</h1>
         </div>
         <div className="legal-tabs slide-up">

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FiMenu, FiX, FiUser, FiLogOut, FiHeart, FiColumns } from 'react-icons/fi';
+import { LuMenu, LuX, LuUser, LuLogOut, LuHeart, LuColumns } from 'react-icons/lu';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
 import BurgerMenu from './BurgerMenu';
@@ -55,11 +55,11 @@ const Navbar = () => {
                 {isAuthenticated ? (
                   <>
                     <Link to="/profile" className="btn btn-secondary btn-sm">
-                      <FiUser />
+                      <LuUser />
                       <span>{t('nav.profile')}</span>
                     </Link>
                     <button onClick={handleLogout} className="btn btn-outline btn-sm">
-                      <FiLogOut />
+                      <LuLogOut />
                       <span>{t('nav.logout')}</span>
                     </button>
                   </>
@@ -81,7 +81,7 @@ const Navbar = () => {
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 aria-label="Menu"
               >
-                {isMenuOpen ? <FiX /> : <FiMenu />}
+                {isMenuOpen ? <LuX /> : <LuMenu />}
               </button>
             </div>
           </div>

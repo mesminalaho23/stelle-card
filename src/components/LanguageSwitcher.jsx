@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { FiGlobe } from 'react-icons/fi';
+import { LuGlobe } from 'react-icons/lu';
 import { useTranslation } from 'react-i18next';
 import './LanguageSwitcher.css';
 

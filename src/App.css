@@ -19,10 +19,10 @@
   width: 100%;
   text-align: center;
   padding: 1.5rem 1rem;
-  color: rgba(255, 255, 255, 0.35);
+  color: var(--text-tertiary);
   font-size: 0.75rem;
   letter-spacing: 0.05em;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--border-color);
   margin-top: auto;
 }
 
@@ -39,7 +39,7 @@
 }
 
 .footer-links a {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-secondary);
   font-size: 0.8rem;
   text-decoration: none;
   transition: color 0.2s ease;

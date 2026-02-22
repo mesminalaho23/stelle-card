@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiArrowLeft, FiUsers, FiPackage, FiSettings, FiDroplet, FiUser, FiMapPin } from 'react-icons/fi';
+import { LuArrowLeft, LuUsers, LuBriefcase, LuCog, LuDroplets, LuUser, LuMapPin, LuClock4 } from 'react-icons/lu';
 import { useBooking } from '../contexts/BookingContext';
 import { bookingService } from '../services/Bookingservice';
 import LocationMap, { getCoords, searchAddressOnline } from '../components/LocationMap';
@@ -15,10 +15,11 @@ const durationOptions = [
 
 const Booking = () => {
   const navigate = useNavigate();
-  const { booking, setDuration, setWithDriver, setDates, setPickupLocation: setCtxLocation, getTotal } = useBooking();
-  const { vehicle, duration, withDriver, startDate, endDate } = booking;
+  const { booking, setDuration, setWithDriver, setDates, setPickupLocation: setCtxLocation, setPickupTime: setCtxTime, getTotal } = useBooking();
+  const { vehicle, duration, withDriver, startDate, endDate, pickupTime } = booking;
   const [localStartDate, setLocalStartDate] = useState(startDate || '');
   const [localEndDate, setLocalEndDate] = useState(endDate || '');
+  const [localPickupTime, setLocalPickupTime] = useState(pickupTime || '');
   const [pickupLocation, setPickupLocation] = useState('');
   const [selectedCoords, setSelectedCoords] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
@@ -62,6 +63,7 @@ const Booking = () => {
   const handleReserve = () => {
     setDates(localStartDate, localEndDate);
     setCtxLocation(pickupLocation);
+    setCtxTime(localPickupTime);
     navigate('/payment');
   };
 
@@ -70,7 +72,7 @@ const Booking = () => {
       <div className="container">
         {/* Back */}
         <button className="vd-back slide-up" onClick={() => navigate(-1)} style={{ marginBottom: '1rem' }}>
-          <FiArrowLeft />
+          <LuArrowLeft />
         </button>
 
         {/* Vehicle Summary */}
@@ -82,11 +84,11 @@ const Booking = () => {
             <h3 className="vehicle-name-small">{vehicle.name}</h3>
             <p className="vehicle-type-small">{vehicle.type} • {vehicle.specs.transmission}</p>
             <div className="spec-row">
-              <span className="spec-icon-small"><FiUsers size={14} /></span>
+              <span className="spec-icon-small"><LuUsers size={14} /></span>
               <span className="spec-text">{vehicle.specs.passengers} Passagers, {vehicle.specs.luggage} Bagages</span>
             </div>
             <div className="spec-row">
-              <span className="spec-icon-small"><FiSettings size={14} /></span>
+              <span className="spec-icon-small"><LuCog size={14} /></span>
               <span className="spec-text">{vehicle.features.slice(0, 3).join(', ')}</span>
             </div>
             <span className="badge badge-green" style={{ marginTop: '0.5rem' }}>
@@ -113,7 +115,7 @@ const Booking = () => {
 
         {/* Pickup Location */}
         <div className="booking-section slide-up">
-          <h3 className="booking-section-title"><FiMapPin style={{ marginRight: '0.5rem' }} />Localisation</h3>
+          <h3 className="booking-section-title"><LuMapPin style={{ marginRight: '0.5rem' }} />Localisation</h3>
           <div className="location-autocomplete">
             <input
               type="text"
@@ -138,7 +140,7 @@ const Booking = () => {
                       setSuggestions([]);
                     }}
                   >
-                    <FiMapPin className="suggestion-icon" />
+                    <LuMapPin className="suggestion-icon" />
                     <span>{loc.name}</span>
                   </button>
                 ))}
@@ -184,6 +186,27 @@ const Booking = () => {
           </div>
         </div>
 
+        {/* Pickup Time */}
+        <div className="booking-section slide-up">
+          <h3 className="booking-section-title"><LuClock4 style={{ marginRight: '0.5rem' }} />Heure de livraison</h3>
+          <div className="form-group">
+            <label className="form-label">Choisissez l'heure de réception du véhicule</label>
+            <input
+              type="time"
+              className="form-input"
+              value={localPickupTime}
+              min="06:00"
+              max="22:00"
+              onChange={(e) => setLocalPickupTime(e.target.value)}
+            />
+          </div>
+          {localPickupTime && (
+            <p className="pickup-time-selected">
+              🕐 Véhicule livré à <strong>{localPickupTime}</strong>
+            </p>
+          )}
+        </div>
+
         {/* With Driver Option */}
         {vehicle.withDriver && (
           <div className="booking-section slide-up">
@@ -192,7 +215,7 @@ const Booking = () => {
               onClick={() => setWithDriver(!withDriver)}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <FiUser size={20} />
+                <LuUser size={20} />
                 <div>
                   <strong>Avec chauffeur</strong>
                   <p style={{ margin: 0, fontSize: '0.8rem', opacity: 0.7 }}>+30% du tarif</p>

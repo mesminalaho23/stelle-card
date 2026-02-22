@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiArrowLeft, FiBell, FiLock, FiTrash2, FiInfo, FiEye, FiEyeOff } from 'react-icons/fi';
+import { LuArrowLeft, LuBell, LuLock, LuTrash2, LuInfo, LuEye, LuEyeOff } from 'react-icons/lu';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
@@ -73,14 +73,14 @@ const Settings = () => {
       <div className="container">
         <div className="settings-header slide-up">
           <button className="vd-back" onClick={() => navigate(-1)}>
-            <FiArrowLeft />
+            <LuArrowLeft />
           </button>
           <h1 className="settings-title">Paramètres</h1>
         </div>
 
         {/* Notifications */}
         <div className="settings-section slide-up">
-          <h3 className="settings-section-title"><FiBell /> Notifications</h3>
+          <h3 className="settings-section-title"><LuBell /> Notifications</h3>
           
           <div className="settings-item">
             <div className="settings-item-info">
@@ -142,7 +142,7 @@ const Settings = () => {
 
         {/* Security */}
         <div className="settings-section slide-up">
-          <h3 className="settings-section-title"><FiLock /> {t('settings.security')}</h3>
+          <h3 className="settings-section-title"><LuLock /> {t('settings.security')}</h3>
           
           <button className="settings-action-btn" onClick={() => setShowPasswordForm(!showPasswordForm)}>
             <span>{t('settings.changePassword')}</span>
@@ -156,7 +156,7 @@ const Settings = () => {
                 <div className="password-field">
                   <input type={showCurrentPwd ? 'text' : 'password'} className="form-input" value={currentPwd} onChange={e => setCurrentPwd(e.target.value)} required />
                   <button type="button" className="password-toggle" onClick={() => setShowCurrentPwd(!showCurrentPwd)}>
-                    {showCurrentPwd ? <FiEyeOff /> : <FiEye />}
+                    {showCurrentPwd ? <LuEyeOff /> : <LuEye />}
                   </button>
                 </div>
               </div>
@@ -165,7 +165,7 @@ const Settings = () => {
                 <div className="password-field">
                   <input type={showNewPwd ? 'text' : 'password'} className="form-input" value={newPwd} onChange={e => setNewPwd(e.target.value)} required minLength={6} />
                   <button type="button" className="password-toggle" onClick={() => setShowNewPwd(!showNewPwd)}>
-                    {showNewPwd ? <FiEyeOff /> : <FiEye />}
+                    {showNewPwd ? <LuEyeOff /> : <LuEye />}
                   </button>
                 </div>
               </div>
@@ -174,7 +174,7 @@ const Settings = () => {
                 <div className="password-field">
                   <input type={showConfirmPwd ? 'text' : 'password'} className="form-input" value={confirmPwd} onChange={e => setConfirmPwd(e.target.value)} required />
                   <button type="button" className="password-toggle" onClick={() => setShowConfirmPwd(!showConfirmPwd)}>
-                    {showConfirmPwd ? <FiEyeOff /> : <FiEye />}
+                    {showConfirmPwd ? <LuEyeOff /> : <LuEye />}
                   </button>
                 </div>
               </div>
@@ -185,7 +185,7 @@ const Settings = () => {
 
         {/* Data */}
         <div className="settings-section slide-up">
-          <h3 className="settings-section-title"><FiTrash2 /> Données</h3>
+          <h3 className="settings-section-title"><LuTrash2 /> Données</h3>
           
           <button className="settings-action-btn settings-action-btn--danger" onClick={handleClearData}>
             <span>Supprimer les données locales</span>
@@ -195,7 +195,7 @@ const Settings = () => {
 
         {/* About */}
         <div className="settings-section slide-up">
-          <h3 className="settings-section-title"><FiInfo /> À propos</h3>
+          <h3 className="settings-section-title"><LuInfo /> À propos</h3>
           <div className="settings-about">
             <div className="settings-about-row">
               <span>Version</span>

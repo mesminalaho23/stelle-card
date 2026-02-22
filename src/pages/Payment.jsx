@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiArrowLeft, FiCreditCard, FiLock, FiCalendar, FiMapPin, FiAlertCircle } from 'react-icons/fi';
+import { LuArrowLeft, LuCreditCard, LuLock, LuCalendarDays, LuMapPin, LuAlertCircle } from 'react-icons/lu';
 import toast from 'react-hot-toast';
 import { useBooking } from '../contexts/BookingContext';
 import { useAuth } from '../contexts/AuthContext';
@@ -44,7 +44,7 @@ const Payment = () => {
   const navigate = useNavigate();
   const { booking, getTotal, clearBooking } = useBooking();
   const { user } = useAuth();
-  const { vehicle, duration, withDriver, startDate, endDate, pickupLocation } = booking;
+  const { vehicle, duration, withDriver, startDate, endDate, pickupLocation, pickupTime } = booking;
   const [paymentMethod, setPaymentMethod] = useState('visa');
   const [cardNumber, setCardNumber] = useState('');
   const [cardName, setCardName] = useState('');
@@ -78,6 +78,7 @@ const Payment = () => {
     if (!startDate) errs.startDate = 'Date de début requise';
     if (!endDate) errs.endDate = 'Date de fin requise';
     if (!pickupLocation) errs.location = 'Adresse de prise en charge requise';
+    if (!pickupTime) errs.pickupTime = 'Heure de livraison requise';
     if (isCardMethod) {
       if (!cardName.trim()) errs.cardName = 'Nom du titulaire requis';
       if (cardNumber.replace(/\s/g, '').length < 16) errs.cardNumber = 'Numéro de carte invalide';
@@ -108,6 +109,7 @@ const Payment = () => {
       startDate,
       endDate,
       pickupLocation,
+      pickupTime,
       total,
       paymentMethod,
       userId: user?.id || '',
@@ -123,7 +125,7 @@ const Payment = () => {
     <div className="payment-page">
       <div className="container">
         <button className="vd-back slide-up" onClick={() => navigate(-1)} style={{ marginBottom: '1rem' }}>
-          <FiArrowLeft />
+          <LuArrowLeft />
         </button>
 
         {/* Order Summary */}
@@ -145,26 +147,30 @@ const Payment = () => {
           )}
 
           {/* Required info warnings */}
-          {(!startDate || !endDate || !pickupLocation) && (
+          {(!startDate || !endDate || !pickupLocation || !pickupTime) && (
             <div className="payment-missing-info">
-              <FiAlertCircle size={14} />
+              <LuAlertCircle size={14} />
               <span>Retournez à la réservation pour renseigner :</span>
               <div className="payment-missing-list">
                 {!startDate && <span className="payment-missing-tag">📅 Date de début</span>}
                 {!endDate && <span className="payment-missing-tag">📅 Date de fin</span>}
                 {!pickupLocation && <span className="payment-missing-tag">📍 Adresse</span>}
+                {!pickupTime && <span className="payment-missing-tag">🕐 Heure de livraison</span>}
               </div>
             </div>
           )}
 
           {pickupLocation && (
-            <div className="summary-row"><span><FiMapPin size={13} /> Lieu</span><span>{pickupLocation}</span></div>
+            <div className="summary-row"><span><LuMapPin size={13} /> Lieu</span><span>{pickupLocation}</span></div>
+          )}
+          {pickupTime && (
+            <div className="summary-row"><span>🕐 Heure</span><span>{pickupTime}</span></div>
           )}
           {startDate && (
-            <div className="summary-row"><span><FiCalendar size={13} /> Du</span><span>{new Date(startDate).toLocaleDateString('fr-FR')}</span></div>
+            <div className="summary-row"><span><LuCalendarDays size={13} /> Du</span><span>{new Date(startDate).toLocaleDateString('fr-FR')}</span></div>
           )}
           {endDate && (
-            <div className="summary-row"><span><FiCalendar size={13} /> Au</span><span>{new Date(endDate).toLocaleDateString('fr-FR')}</span></div>
+            <div className="summary-row"><span><LuCalendarDays size={13} /> Au</span><span>{new Date(endDate).toLocaleDateString('fr-FR')}</span></div>
           )}
         </div>
 
@@ -189,7 +195,7 @@ const Payment = () => {
         {isCardMethod && (
           <div className="card-form slide-up">
             <div className="card-form-header">
-              <FiLock size={14} />
+              <LuLock size={14} />
               <span>Paiement sécurisé</span>
             </div>
             <div className="form-group">
@@ -207,7 +213,7 @@ const Payment = () => {
             <div className="form-group">
               <label className="form-label">Numéro de carte</label>
               <div className="card-input-wrapper">
-                <FiCreditCard className="card-input-icon" />
+                <LuCreditCard className="card-input-icon" />
                 <input
                   type="text"
                   className={`form-input form-input--with-icon ${errors.cardNumber ? 'form-input--error' : ''}`}
@@ -227,7 +233,7 @@ const Payment = () => {
               <div className="form-group" style={{ flex: 1 }}>
                 <label className="form-label">Expiration</label>
                 <div className="card-input-wrapper">
-                  <FiCalendar className="card-input-icon" />
+                  <LuCalendarDays className="card-input-icon" />
                   <input
                     type="text"
                     className={`form-input form-input--with-icon ${errors.cardExpiry ? 'form-input--error' : ''}`}
@@ -242,7 +248,7 @@ const Payment = () => {
               <div className="form-group" style={{ flex: 1 }}>
                 <label className="form-label">CVV</label>
                 <div className="card-input-wrapper">
-                  <FiLock className="card-input-icon" />
+                  <LuLock className="card-input-icon" />
                   <input
                     type="password"
                     className={`form-input form-input--with-icon ${errors.cardCvv ? 'form-input--error' : ''}`}

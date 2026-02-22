@@ -2,7 +2,7 @@
 .onboarding-skip { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: var(--text-secondary); font-size: 0.9rem; cursor: pointer; }
 .onboarding-skip:hover { color: var(--text-primary); }
 .onboarding-slide { text-align: center; animation: fadeIn 0.4s ease-out; }
-.onboarding-emoji { font-size: 5rem; display: block; margin-bottom: 2rem; }
+.onboarding-icon-wrapper { width: 120px; height: 120px; border-radius: 32px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; margin: 0 auto 2rem; transition: all 0.4s ease; }
 .onboarding-title { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.75rem; }
 .onboarding-desc { font-size: 1rem; color: var(--text-secondary); max-width: 300px; line-height: 1.6; margin: 0 auto; }
 .onboarding-dots { display: flex; gap: 0.5rem; margin: 2.5rem 0; }

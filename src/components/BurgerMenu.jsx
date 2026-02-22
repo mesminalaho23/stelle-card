@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FiX, FiHome, FiTruck, FiList, FiUser, FiLogIn, FiUserPlus, FiLogOut } from 'react-icons/fi';
+import { LuX, LuHome, LuCar, LuList, LuUser, LuLogIn, LuUserPlus, LuLogOut } from 'react-icons/lu';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
 import './BurgerMenu.css';
@@ -61,7 +61,7 @@ const BurgerMenu = ({ isOpen, onClose }) => {
       <div className={`burger-panel ${isOpen ? 'burger-panel--active' : ''}`}>
         {/* Close Button */}
         <button className="burger-close" onClick={onClose} aria-label="Fermer le menu">
-          <FiX />
+          <LuX />
         </button>
 
         {/* User Info */}
@@ -78,22 +78,22 @@ const BurgerMenu = ({ isOpen, onClose }) => {
         {/* Navigation Links */}
         <nav className="burger-nav">
           <Link to="/" className="burger-nav-link" onClick={handleLinkClick}>
-            <FiHome className="burger-nav-icon" />
+            <LuHome className="burger-nav-icon" />
             <span>{t('nav.home')}</span>
           </Link>
           <Link to="/vehicles" className="burger-nav-link" onClick={handleLinkClick}>
-            <FiTruck className="burger-nav-icon" />
+            <LuCar className="burger-nav-icon" />
             <span>{t('nav.vehicles')}</span>
           </Link>
           {isAuthenticated && (
             <Link to="/my-rentals" className="burger-nav-link" onClick={handleLinkClick}>
-              <FiList className="burger-nav-icon" />
+              <LuList className="burger-nav-icon" />
               <span>{t('nav.myRentals')}</span>
             </Link>
           )}
           {isAuthenticated && (
             <Link to="/profile" className="burger-nav-link" onClick={handleLinkClick}>
-              <FiUser className="burger-nav-icon" />
+              <LuUser className="burger-nav-icon" />
               <span>{t('nav.profile')}</span>
             </Link>
           )}
@@ -120,7 +120,7 @@ const BurgerMenu = ({ isOpen, onClose }) => {
         <div className="burger-auth">
           {isAuthenticated ? (
             <button className="burger-auth-btn burger-auth-btn--logout" onClick={handleLogout}>
-              <FiLogOut className="burger-nav-icon" />
+              <LuLogOut className="burger-nav-icon" />
               <span>{t('nav.logout')}</span>
             </button>
           ) : (
@@ -130,7 +130,7 @@ const BurgerMenu = ({ isOpen, onClose }) => {
                 className="burger-auth-btn burger-auth-btn--login"
                 onClick={handleLinkClick}
               >
-                <FiLogIn className="burger-nav-icon" />
+                <LuLogIn className="burger-nav-icon" />
                 <span>{t('nav.login')}</span>
               </Link>
               <Link
@@ -138,7 +138,7 @@ const BurgerMenu = ({ isOpen, onClose }) => {
                 className="burger-auth-btn burger-auth-btn--register"
                 onClick={handleLinkClick}
               >
-                <FiUserPlus className="burger-nav-icon" />
+                <LuUserPlus className="burger-nav-icon" />
                 <span>{t('nav.register')}</span>
               </Link>
             </>
