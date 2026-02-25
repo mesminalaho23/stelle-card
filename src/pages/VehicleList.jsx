@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { LuSearch, LuUsers, LuZap } from 'react-icons/lu';
 import { getVehicles, categories } from '../services/vehicleService';
 import './VehicleList.css';
-
-const durationOptions = [
-  { label: 'Jour', key: '24h' },
-  { label: '48h', key: '48h' },
-  { label: '1 Semaine', key: '1week' },
-  { label: '1 Mois', key: '1month' }
-];
 
 const VehicleList = () => {
   const navigate = useNavigate();
@@ -24,6 +18,14 @@ const VehicleList = () => {
   const [maxPrice, setMaxPrice] = useState(300);
   const [fuelFilter, setFuelFilter] = useState('');
   const [transFilter, setTransFilter] = useState('');
+  const { t } = useTranslation();
+
+  const durationOptions = [
+    { label: t('duration.day'), key: '24h' },
+    { label: '48h', key: '48h' },
+    { label: t('duration.week'), key: '1week' },
+    { label: t('duration.month'), key: '1month' }
+  ];
 
   useEffect(() => {
     const cat = searchParams.get('category') || 'all';
@@ -51,7 +53,7 @@ const VehicleList = () => {
           <LuSearch className="search-bar-icon" />
           <input
             type="text"
-            placeholder="Rechercher un véhicule..."
+            placeholder={t('vehicles.searchPlaceholder')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="search-bar-input"
@@ -88,32 +90,32 @@ const VehicleList = () => {
         {/* Advanced Filters */}
         <div className="advanced-filters slide-up">
           <div className="filter-group filter-group--budget">
-            <label className="filter-label">💎 Budget max</label>
+            <label className="filter-label">💎 {t('vehicles.budgetMax')}</label>
             <div className="budget-slider-wrapper">
               <input type="range" min="20" max="300" value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))} className="price-slider" />
               <div className="budget-track-fill" style={{ width: `${((maxPrice - 20) / 280) * 100}%` }} />
             </div>
             <div className="budget-info">
-              <span className="budget-value">{maxPrice}€<small>/jour</small></span>
+              <span className="budget-value">{maxPrice}€<small>{t('vehicles.perDay')}</small></span>
               <span className="budget-range">20€ — 300€</span>
             </div>
           </div>
           <div className="filter-group">
-            <label className="filter-label">⛽ Carburant</label>
+            <label className="filter-label">⛽ {t('vehicles.fuel')}</label>
             <div className="filter-chips">
               {['', 'Essence', 'Diesel', 'Électrique'].map(f => (
                 <button key={f} className={`filter-chip ${fuelFilter === f ? 'filter-chip--active' : ''}`} onClick={() => setFuelFilter(f)}>
-                  {f === '' ? 'Tous' : f}
+                  {f === '' ? t('vehicles.all') : t(`vehicles.fuel_${f === 'Essence' ? 'petrol' : f === 'Diesel' ? 'diesel' : 'electric'}`)}
                 </button>
               ))}
             </div>
           </div>
           <div className="filter-group">
-            <label className="filter-label">⚙️ Transmission</label>
+            <label className="filter-label">⚙️ {t('vehicles.transmission')}</label>
             <div className="filter-chips">
-              {['', 'Automatique', 'Manuelle'].map(t => (
-                <button key={t} className={`filter-chip ${transFilter === t ? 'filter-chip--active' : ''}`} onClick={() => setTransFilter(t)}>
-                  {t === '' ? 'Tous' : t}
+              {['', 'Automatique', 'Manuelle'].map(tr => (
+                <button key={tr} className={`filter-chip ${transFilter === tr ? 'filter-chip--active' : ''}`} onClick={() => setTransFilter(tr)}>
+                  {tr === '' ? t('vehicles.all') : t(`vehicles.transmission_${tr === 'Automatique' ? 'auto' : 'manual'}`)}
                 </button>
               ))}
             </div>
@@ -121,7 +123,7 @@ const VehicleList = () => {
         </div>
 
         {/* Results Count */}
-        <p className="results-count">{vehicles.length} véhicule{vehicles.length !== 1 ? 's' : ''} trouvé{vehicles.length !== 1 ? 's' : ''}</p>
+        <p className="results-count">{vehicles.length} {t('vehicles.found')}</p>
 
         {/* Vehicle Cards */}
         {vehicles.length > 0 ? (
@@ -139,7 +141,7 @@ const VehicleList = () => {
                     {vehicle.category}
                   </span>
                   {!vehicle.available && (
-                    <div className="vl-unavailable">Indisponible</div>
+                    <div className="vl-unavailable">{t('vehicles.unavailable')}</div>
                   )}
                 </div>
                 <div className="vl-card-body">
@@ -154,7 +156,7 @@ const VehicleList = () => {
                       <span className="vl-price-amount">{vehicle.price[selectedDuration]}€</span>
                       <span className="vl-price-period">/{durationOptions.find(d => d.key === selectedDuration)?.label.toLowerCase()}</span>
                     </div>
-                    <span className="vl-card-cta">Voir →</span>
+                    <span className="vl-card-cta">{t('vehicles.see')}</span>
                   </div>
                 </div>
               </div>
@@ -163,8 +165,8 @@ const VehicleList = () => {
         ) : (
           <div className="vl-empty slide-up">
             <span className="vl-empty-icon">🔍</span>
-            <h3>Aucun véhicule trouvé</h3>
-            <p>Essayez de modifier vos filtres</p>
+            <h3>{t('vehicles.noResults')}</h3>
+            <p>{t('vehicles.noResultsSub')}</p>
           </div>
         )}
       </div>

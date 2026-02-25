@@ -1,8 +1,13 @@
 import { LuAlertTriangle, LuCheck, LuX } from 'react-icons/lu';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import './ConfirmModal.css';
 
-const ConfirmModal = ({ isOpen, title, message, icon, confirmLabel = 'Confirmer', cancelLabel = 'Annuler', onConfirm, onCancel, variant = 'danger' }) => {
+const ConfirmModal = ({ isOpen, title, message, icon, confirmLabel, cancelLabel, onConfirm, onCancel, variant = 'danger' }) => {
+  const { t } = useTranslation();
+  const effectiveConfirmLabel = confirmLabel || t('confirm.confirm');
+  const effectiveCancelLabel = cancelLabel || t('confirm.cancel');
+
   if (!isOpen) return null;
 
   return (
@@ -25,11 +30,11 @@ const ConfirmModal = ({ isOpen, title, message, icon, confirmLabel = 'Confirmer'
             <div className="confirm-actions">
               <button className="confirm-btn confirm-btn--cancel" onClick={onCancel}>
                 <LuX size={16} />
-                {cancelLabel}
+                {effectiveCancelLabel}
               </button>
               <button className={`confirm-btn confirm-btn--${variant}`} onClick={onConfirm}>
                 {variant === 'danger' ? '🗑️' : '✓'}
-                {confirmLabel}
+                {effectiveConfirmLabel}
               </button>
             </div>
           </motion.div>

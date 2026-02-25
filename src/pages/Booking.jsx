@@ -1,22 +1,24 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { LuArrowLeft, LuUsers, LuBriefcase, LuCog, LuDroplets, LuUser, LuMapPin, LuClock4 } from 'react-icons/lu';
 import { useBooking } from '../contexts/BookingContext';
 import { bookingService } from '../services/Bookingservice';
 import LocationMap, { getCoords, searchAddressOnline } from '../components/LocationMap';
 import './Booking.css';
 
-const durationOptions = [
-  { label: 'Jour', key: '24h' },
-  { label: '48h', key: '48h' },
-  { label: '1 Semaine', key: '1week' },
-  { label: '1 Mois', key: '1month' }
-];
-
 const Booking = () => {
   const navigate = useNavigate();
   const { booking, setDuration, setWithDriver, setDates, setPickupLocation: setCtxLocation, setPickupTime: setCtxTime, getTotal } = useBooking();
   const { vehicle, duration, withDriver, startDate, endDate, pickupTime } = booking;
+  const { t } = useTranslation();
+
+  const durationOptions = [
+    { label: t('duration.day'), key: '24h' },
+    { label: '48h', key: '48h' },
+    { label: t('duration.week'), key: '1week' },
+    { label: t('duration.month'), key: '1month' }
+  ];
   const [localStartDate, setLocalStartDate] = useState(startDate || '');
   const [localEndDate, setLocalEndDate] = useState(endDate || '');
   const [localPickupTime, setLocalPickupTime] = useState(pickupTime || '');
@@ -47,10 +49,10 @@ const Booking = () => {
         <div className="container">
           <div className="booking-empty slide-up" style={{ textAlign: 'center', padding: '4rem 1rem' }}>
             <span style={{ fontSize: '3rem' }}>🚗</span>
-            <h2>Aucun véhicule sélectionné</h2>
-            <p>Veuillez d'abord choisir un véhicule.</p>
+            <h2>{t('booking.noVehicle')}</h2>
+            <p>{t('booking.noVehicleDesc')}</p>
             <button className="btn-primary" onClick={() => navigate('/vehicles')} style={{ marginTop: '1rem' }}>
-              Voir les véhicules
+              {t('booking.seeVehicles')}
             </button>
           </div>
         </div>
@@ -85,21 +87,21 @@ const Booking = () => {
             <p className="vehicle-type-small">{vehicle.type} • {vehicle.specs.transmission}</p>
             <div className="spec-row">
               <span className="spec-icon-small"><LuUsers size={14} /></span>
-              <span className="spec-text">{vehicle.specs.passengers} Passagers, {vehicle.specs.luggage} Bagages</span>
+              <span className="spec-text">{vehicle.specs.passengers} {t('vehicles.passengers')}, {vehicle.specs.luggage} {t('vehicles.luggage')}</span>
             </div>
             <div className="spec-row">
               <span className="spec-icon-small"><LuCog size={14} /></span>
               <span className="spec-text">{vehicle.features.slice(0, 3).join(', ')}</span>
             </div>
             <span className="badge badge-green" style={{ marginTop: '0.5rem' }}>
-              DISPONIBLE
+              {t('vehicles.available')}
             </span>
           </div>
         </div>
 
         {/* Duration Selection */}
         <div className="booking-section slide-up">
-          <h3 className="booking-section-title">Durée</h3>
+          <h3 className="booking-section-title">{t('booking.duration')}</h3>
           <div className="duration-bar">
             {durationOptions.map((dur) => (
               <button
@@ -115,12 +117,12 @@ const Booking = () => {
 
         {/* Pickup Location */}
         <div className="booking-section slide-up">
-          <h3 className="booking-section-title"><LuMapPin style={{ marginRight: '0.5rem' }} />Localisation</h3>
+          <h3 className="booking-section-title"><LuMapPin style={{ marginRight: '0.5rem' }} />{t('booking.location')}</h3>
           <div className="location-autocomplete">
             <input
               type="text"
               className="form-input"
-              placeholder="Tapez une adresse..."
+              placeholder={t('booking.locationPlaceholder')}
               value={pickupLocation}
               onChange={(e) => handleLocationInput(e.target.value)}
               onFocus={() => { if (suggestions.length > 0) setShowSuggestions(true); }}
@@ -146,7 +148,7 @@ const Booking = () => {
                 ))}
               </div>
             )}
-            {loadingSuggestions && <div className="location-loading">Recherche...</div>}
+            {loadingSuggestions && <div className="location-loading">{t('booking.searching')}</div>}
           </div>
           {(selectedCoords || getCoords(pickupLocation)) && (
             <LocationMap
@@ -163,10 +165,10 @@ const Booking = () => {
 
         {/* Dates */}
         <div className="booking-section slide-up">
-          <h3 className="booking-section-title">Dates</h3>
+          <h3 className="booking-section-title">{t('booking.dates')}</h3>
           <div style={{ display: 'flex', gap: '0.75rem' }}>
             <div className="form-group" style={{ flex: 1 }}>
-              <label className="form-label">Début</label>
+              <label className="form-label">{t('booking.startDate')}</label>
               <input
                 type="date"
                 className="form-input"
@@ -175,7 +177,7 @@ const Booking = () => {
               />
             </div>
             <div className="form-group" style={{ flex: 1 }}>
-              <label className="form-label">Fin</label>
+              <label className="form-label">{t('booking.endDate')}</label>
               <input
                 type="date"
                 className="form-input"
@@ -188,9 +190,9 @@ const Booking = () => {
 
         {/* Pickup Time */}
         <div className="booking-section slide-up">
-          <h3 className="booking-section-title"><LuClock4 style={{ marginRight: '0.5rem' }} />Heure de livraison</h3>
+          <h3 className="booking-section-title"><LuClock4 style={{ marginRight: '0.5rem' }} />{t('booking.pickupTime')}</h3>
           <div className="form-group">
-            <label className="form-label">Choisissez l'heure de réception du véhicule</label>
+            <label className="form-label">{t('booking.pickupTimeLabel')}</label>
             <input
               type="time"
               className="form-input"
@@ -202,7 +204,7 @@ const Booking = () => {
           </div>
           {localPickupTime && (
             <p className="pickup-time-selected">
-              🕐 Véhicule livré à <strong>{localPickupTime}</strong>
+              🕐 {t('booking.deliveredAt')} <strong>{localPickupTime}</strong>
             </p>
           )}
         </div>
@@ -217,8 +219,8 @@ const Booking = () => {
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <LuUser size={20} />
                 <div>
-                  <strong>Avec chauffeur</strong>
-                  <p style={{ margin: 0, fontSize: '0.8rem', opacity: 0.7 }}>+30% du tarif</p>
+                  <strong>{t('booking.withDriver')}</strong>
+                  <p style={{ margin: 0, fontSize: '0.8rem', opacity: 0.7 }}>{t('booking.driverSurcharge')}</p>
                 </div>
               </div>
               <div className={`booking-toggle ${withDriver ? 'booking-toggle--on' : ''}`}>
@@ -236,12 +238,12 @@ const Booking = () => {
           </div>
           {withDriver && (
             <div className="price-row">
-              <span className="price-label">Supplément chauffeur</span>
+              <span className="price-label">{t('booking.driverSupplement')}</span>
               <span className="price-value">+{Math.round(vehicle.price[duration] * 0.3)}€</span>
             </div>
           )}
           <div className="price-row price-row--total">
-            <span className="price-label">Total</span>
+            <span className="price-label">{t('booking.total')}</span>
             <span className="price-value">{total}€</span>
           </div>
         </div>
@@ -251,7 +253,7 @@ const Booking = () => {
           className="btn-primary reserve-action-btn slide-up"
           onClick={handleReserve}
         >
-          Réserver — {total}€
+          {t('booking.reserve')} — {total}€
         </button>
       </div>
     </div>

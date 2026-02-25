@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { LuHeart, LuArrowLeft } from 'react-icons/lu';
 import { useFavorites } from '../contexts/FavoritesContext';
 import { getVehicleById } from '../services/VehicleService';
@@ -7,6 +8,7 @@ import './Favorites.css';
 
 const Favorites = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { favorites } = useFavorites();
   const favoriteVehicles = favorites.map(id => getVehicleById(id)).filter(Boolean);
 
@@ -18,8 +20,8 @@ const Favorites = () => {
             <LuArrowLeft />
           </button>
           <div>
-            <h1 className="favorites-title">Mes Favoris</h1>
-            <p className="favorites-count">{favoriteVehicles.length} véhicule{favoriteVehicles.length !== 1 ? 's' : ''}</p>
+            <h1 className="favorites-title">{t('favorites.title')}</h1>
+            <p className="favorites-count">{favoriteVehicles.length} {t('favorites.count')}</p>
           </div>
         </div>
 
@@ -32,10 +34,10 @@ const Favorites = () => {
         ) : (
           <div className="favorites-empty slide-up">
             <LuHeart className="favorites-empty-icon" />
-            <h2>Aucun favori</h2>
-            <p>Appuyez sur ❤️ sur un véhicule pour l'ajouter ici.</p>
+            <h2>{t('favorites.empty')}</h2>
+            <p>{t('favorites.emptySub')}</p>
             <button className="btn-primary" onClick={() => navigate('/vehicles')} style={{ width: 'auto', marginTop: '1rem' }}>
-              Voir les véhicules
+              {t('favorites.seeVehicles')}
             </button>
           </div>
         )}

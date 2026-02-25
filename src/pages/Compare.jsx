@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { LuArrowLeft, LuX, LuPlus, LuStar, LuUsers, LuBriefcase, LuCog, LuDroplets } from 'react-icons/lu';
 import { vehiclesData } from '../services/VehicleService';
 import './Compare.css';
 
 const Compare = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [selectedIds, setSelectedIds] = useState([]);
   const [showPicker, setShowPicker] = useState(false);
 
@@ -31,8 +33,8 @@ const Compare = () => {
             <LuArrowLeft />
           </button>
           <div>
-            <h1 className="compare-title">Comparer</h1>
-            <p className="compare-subtitle">{selectedVehicles.length}/3 véhicules sélectionnés</p>
+            <h1 className="compare-title">{t('compare.title')}</h1>
+            <p className="compare-subtitle">{selectedVehicles.length}/3 {t('compare.selected')}</p>
           </div>
         </div>
 
@@ -49,38 +51,38 @@ const Compare = () => {
 
               <div className="compare-specs">
                 <div className="compare-spec-row">
-                  <span className="compare-spec-label"><LuStar /> Note</span>
+                  <span className="compare-spec-label"><LuStar /> {t('compare.rating')}</span>
                   <span className="compare-spec-value">{vehicle.rating}/5</span>
                 </div>
                 <div className="compare-spec-row">
-                  <span className="compare-spec-label"><LuUsers /> Places</span>
+                  <span className="compare-spec-label"><LuUsers /> {t('compare.seats')}</span>
                   <span className="compare-spec-value">{vehicle.specs.passengers}</span>
                 </div>
                 <div className="compare-spec-row">
-                  <span className="compare-spec-label"><LuBriefcase /> Bagages</span>
+                  <span className="compare-spec-label"><LuBriefcase /> {t('vehicles.luggage')}</span>
                   <span className="compare-spec-value">{vehicle.specs.luggage}</span>
                 </div>
                 <div className="compare-spec-row">
-                  <span className="compare-spec-label"><LuCog /> Transmission</span>
+                  <span className="compare-spec-label"><LuCog /> {t('vehicles.transmission')}</span>
                   <span className="compare-spec-value">{vehicle.specs.transmission}</span>
                 </div>
                 <div className="compare-spec-row">
-                  <span className="compare-spec-label"><LuDroplets /> Carburant</span>
+                  <span className="compare-spec-label"><LuDroplets /> {t('vehicles.fuel')}</span>
                   <span className="compare-spec-value">{vehicle.specs.fuel}</span>
                 </div>
               </div>
 
               <div className="compare-prices">
                 <div className="compare-price-row">
-                  <span>Jour</span>
+                  <span>{t('compare.day')}</span>
                   <span className="compare-price-val">{vehicle.price['24h']}€</span>
                 </div>
                 <div className="compare-price-row">
-                  <span>Semaine</span>
+                  <span>{t('compare.week')}</span>
                   <span className="compare-price-val">{vehicle.price['1week']}€</span>
                 </div>
                 <div className="compare-price-row">
-                  <span>Mois</span>
+                  <span>{t('compare.month')}</span>
                   <span className="compare-price-val">{vehicle.price['1month']}€</span>
                 </div>
               </div>
@@ -95,7 +97,7 @@ const Compare = () => {
                 className="btn-primary compare-book-btn"
                 onClick={() => navigate(`/vehicles/${vehicle.id}`)}
               >
-                Voir détails
+                {t('compare.viewDetails')}
               </button>
             </div>
           ))}
@@ -104,7 +106,7 @@ const Compare = () => {
           {selectedIds.length < 3 && (
             <button className="compare-add-slot" onClick={() => setShowPicker(true)}>
               <LuPlus />
-              <span>Ajouter un véhicule</span>
+              <span>{t('compare.addVehicle')}</span>
             </button>
           )}
         </div>
@@ -115,7 +117,7 @@ const Compare = () => {
             <div className="compare-overlay" onClick={() => setShowPicker(false)} />
             <div className="compare-picker slide-up">
               <div className="compare-picker-header">
-                <h3>Choisir un véhicule</h3>
+                <h3>{t('compare.chooseVehicle')}</h3>
                 <button className="vd-back" onClick={() => setShowPicker(false)}>
                   <LuX />
                 </button>

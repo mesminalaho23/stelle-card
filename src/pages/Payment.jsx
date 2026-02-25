@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LuArrowLeft, LuCreditCard, LuLock, LuCalendarDays, LuMapPin, LuAlertCircle } from 'react-icons/lu';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import { useBooking } from '../contexts/BookingContext';
+
 import { useAuth } from '../contexts/AuthContext';
 import { bookingService } from '../services/Bookingservice';
 import ConfirmModal from '../components/ConfirmModal';
@@ -44,6 +46,7 @@ const Payment = () => {
   const navigate = useNavigate();
   const { booking, getTotal, clearBooking } = useBooking();
   const { user } = useAuth();
+  const { t, i18n } = useTranslation();
   const { vehicle, duration, withDriver, startDate, endDate, pickupLocation, pickupTime } = booking;
   const [paymentMethod, setPaymentMethod] = useState('visa');
   const [cardNumber, setCardNumber] = useState('');
@@ -60,7 +63,7 @@ const Payment = () => {
         <div className="container">
           <div style={{ textAlign: 'center', padding: '4rem 1rem' }}>
             <span style={{ fontSize: '3rem' }}>🚗</span>
-            <h2>Aucune réservation en cours</h2>
+            <h2>{t('payment.noBooking')}</h2>
             <button className="btn-primary" onClick={() => navigate('/vehicles')} style={{ marginTop: '1rem' }}>
               Voir les véhicules
             </button>
@@ -75,15 +78,15 @@ const Payment = () => {
 
   const validate = () => {
     const errs = {};
-    if (!startDate) errs.startDate = 'Date de début requise';
-    if (!endDate) errs.endDate = 'Date de fin requise';
-    if (!pickupLocation) errs.location = 'Adresse de prise en charge requise';
-    if (!pickupTime) errs.pickupTime = 'Heure de livraison requise';
+    if (!startDate) errs.startDate = t('payment.errors.startDate');
+    if (!endDate) errs.endDate = t('payment.errors.endDate');
+    if (!pickupLocation) errs.location = t('payment.errors.location');
+    if (!pickupTime) errs.pickupTime = t('payment.errors.pickupTime');
     if (isCardMethod) {
-      if (!cardName.trim()) errs.cardName = 'Nom du titulaire requis';
-      if (cardNumber.replace(/\s/g, '').length < 16) errs.cardNumber = 'Numéro de carte invalide';
-      if (cardExpiry.length < 5) errs.cardExpiry = 'Date d\'expiration invalide';
-      if (cardCvv.length < 3) errs.cardCvv = 'Code de sécurité invalide';
+      if (!cardName.trim()) errs.cardName = t('payment.errors.cardName');
+      if (cardNumber.replace(/\s/g, '').length < 16) errs.cardNumber = t('payment.errors.cardNumber');
+      if (cardExpiry.length < 5) errs.cardExpiry = t('payment.errors.cardExpiry');
+      if (cardCvv.length < 3) errs.cardCvv = t('payment.errors.cardCvv');
     }
     setErrors(errs);
     return Object.keys(errs).length === 0;
@@ -91,7 +94,7 @@ const Payment = () => {
 
   const handlePayClick = () => {
     if (!validate()) {
-      toast.error('Veuillez remplir tous les champs obligatoires');
+      toast.error(t('payment.fillRequired'));
       return;
     }
     setShowConfirm(true);
@@ -117,7 +120,7 @@ const Payment = () => {
       userEmail: user?.email || ''
     });
     clearBooking();
-    toast.success('Réservation confirmée !');
+    toast.success(t('payment.success'));
     navigate('/my-rentals');
   };
 
@@ -130,7 +133,7 @@ const Payment = () => {
 
         {/* Order Summary */}
         <div className="payment-summary slide-up">
-          <h3 style={{ marginBottom: '0.75rem' }}>Récapitulatif</h3>
+          <h3 style={{ marginBottom: '0.75rem' }}>{t('payment.summary')}</h3>
           <div className="summary-row">
             <span>{vehicle.name}</span>
             <span>{vehicle.price[duration]}€</span>
@@ -141,7 +144,7 @@ const Payment = () => {
           </div>
           {withDriver && (
             <div className="summary-row">
-              <span>Chauffeur (+30%)</span>
+              <span>{t('payment.driver')}</span>
               <span>+{Math.round(vehicle.price[duration] * 0.3)}€</span>
             </div>
           )}
@@ -150,33 +153,33 @@ const Payment = () => {
           {(!startDate || !endDate || !pickupLocation || !pickupTime) && (
             <div className="payment-missing-info">
               <LuAlertCircle size={14} />
-              <span>Retournez à la réservation pour renseigner :</span>
+              <span>{t('payment.missingInfo')}</span>
               <div className="payment-missing-list">
-                {!startDate && <span className="payment-missing-tag">📅 Date de début</span>}
-                {!endDate && <span className="payment-missing-tag">📅 Date de fin</span>}
-                {!pickupLocation && <span className="payment-missing-tag">📍 Adresse</span>}
-                {!pickupTime && <span className="payment-missing-tag">🕐 Heure de livraison</span>}
+                {!startDate && <span className="payment-missing-tag">📅 {t('payment.missingStartDate')}</span>}
+                {!endDate && <span className="payment-missing-tag">📅 {t('payment.missingEndDate')}</span>}
+                {!pickupLocation && <span className="payment-missing-tag">📍 {t('payment.missingAddress')}</span>}
+                {!pickupTime && <span className="payment-missing-tag">🕐 {t('payment.missingTime')}</span>}
               </div>
             </div>
           )}
 
           {pickupLocation && (
-            <div className="summary-row"><span><LuMapPin size={13} /> Lieu</span><span>{pickupLocation}</span></div>
+            <div className="summary-row"><span><LuMapPin size={13} /> {t('payment.location')}</span><span>{pickupLocation}</span></div>
           )}
           {pickupTime && (
-            <div className="summary-row"><span>🕐 Heure</span><span>{pickupTime}</span></div>
+            <div className="summary-row"><span>🕐 {t('payment.time')}</span><span>{pickupTime}</span></div>
           )}
           {startDate && (
-            <div className="summary-row"><span><LuCalendarDays size={13} /> Du</span><span>{new Date(startDate).toLocaleDateString('fr-FR')}</span></div>
+            <div className="summary-row"><span><LuCalendarDays size={13} /> {t('payment.from')}</span><span>{new Date(startDate).toLocaleDateString(i18n.language === 'fr' ? 'fr-FR' : 'en-US')}</span></div>
           )}
           {endDate && (
-            <div className="summary-row"><span><LuCalendarDays size={13} /> Au</span><span>{new Date(endDate).toLocaleDateString('fr-FR')}</span></div>
+            <div className="summary-row"><span><LuCalendarDays size={13} /> {t('payment.to')}</span><span>{new Date(endDate).toLocaleDateString(i18n.language === 'fr' ? 'fr-FR' : 'en-US')}</span></div>
           )}
         </div>
 
         {/* Payment Methods */}
         <div className="payment-methods slide-up">
-          <h3 className="payment-methods-title">Moyen de paiement</h3>
+          <h3 className="payment-methods-title">{t('payment.paymentMethod')}</h3>
           <div className="payment-methods-grid">
             {paymentMethods.map(method => (
               <button
@@ -196,14 +199,14 @@ const Payment = () => {
           <div className="card-form slide-up">
             <div className="card-form-header">
               <LuLock size={14} />
-              <span>Paiement sécurisé</span>
+              <span>{t('payment.securePayment')}</span>
             </div>
             <div className="form-group">
-              <label className="form-label">Nom du titulaire</label>
+              <label className="form-label">{t('payment.cardName')}</label>
               <input
                 type="text"
                 className={`form-input ${errors.cardName ? 'form-input--error' : ''}`}
-                placeholder="ex. Jean Dupont"
+                placeholder={t('payment.cardNamePlaceholder')}
                 value={cardName}
                 onChange={e => { setCardName(e.target.value); setErrors(p => ({ ...p, cardName: '' })); }}
               />
@@ -211,7 +214,7 @@ const Payment = () => {
             </div>
 
             <div className="form-group">
-              <label className="form-label">Numéro de carte</label>
+              <label className="form-label">{t('payment.cardNumber')}</label>
               <div className="card-input-wrapper">
                 <LuCreditCard className="card-input-icon" />
                 <input
@@ -231,7 +234,7 @@ const Payment = () => {
 
             <div className="card-form-row">
               <div className="form-group" style={{ flex: 1 }}>
-                <label className="form-label">Expiration</label>
+                <label className="form-label">{t('payment.expiry')}</label>
                 <div className="card-input-wrapper">
                   <LuCalendarDays className="card-input-icon" />
                   <input
@@ -267,7 +270,7 @@ const Payment = () => {
         {/* Total */}
         <div className="payment-total slide-up">
           <div className="total-row">
-            <span className="total-label">Total</span>
+            <span className="total-label">{t('payment.total')}</span>
             <span className="total-amount">{total}€</span>
           </div>
         </div>
@@ -278,17 +281,17 @@ const Payment = () => {
           onClick={handlePayClick}
           disabled={isProcessing}
         >
-          {isProcessing ? 'Traitement...' : `Payer ${total}€`}
+          {isProcessing ? t('payment.processing') : `Payer ${total}€`}
         </button>
 
         {/* Confirm Modal */}
         <ConfirmModal
           isOpen={showConfirm}
-          title="Confirmer le paiement"
+          title={t('payment.confirmTitle')}
           message={`Vous allez payer ${total}€ pour la location de ${vehicle.name}. Cette action est définitive.`}
           variant="success"
           confirmLabel={`Payer ${total}€`}
-          cancelLabel="Annuler"
+          cancelLabel={t('payment.cancel')}
           onConfirm={handleConfirmPayment}
           onCancel={() => setShowConfirm(false)}
         />

@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { LuBell, LuX } from 'react-icons/lu';
 import './Notifications.css';
 
-const defaultNotifs = [
-  { id: 1, title: 'Bienvenue !', message: 'Bienvenue sur Stelle Card. Explorez notre flotte premium.', time: 'Maintenant', read: false },
-  { id: 2, title: 'Offre spéciale', message: '-20% sur votre première location avec le code STELLE20.', time: 'Il y a 2h', read: false },
-  { id: 3, title: 'Nouveauté', message: 'La Tesla Model 3 est maintenant disponible !', time: 'Hier', read: true }
-];
-
 const Notifications = () => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
+
+  const defaultNotifs = [
+    { id: 1, title: t('notifications.welcome'), message: t('notifications.welcomeMsg'), time: t('notifications.now'), read: false },
+    { id: 2, title: t('notifications.specialOffer'), message: t('notifications.specialOfferMsg'), time: t('notifications.2hAgo'), read: false },
+    { id: 3, title: t('notifications.newArrival'), message: t('notifications.newArrivalMsg'), time: t('notifications.yesterday'), read: true }
+  ];
+
   const [notifs, setNotifs] = useState(() => {
     const stored = localStorage.getItem('notifications');
     return stored ? JSON.parse(stored) : defaultNotifs;
@@ -32,7 +35,7 @@ const Notifications = () => {
           <div className="notif-overlay" onClick={() => setIsOpen(false)} />
           <div className="notif-panel slide-up">
             <div className="notif-panel-header">
-              <h3>Notifications</h3>
+              <h3>{t('notifications.title')}</h3>
               <button onClick={() => setIsOpen(false)}><LuX /></button>
             </div>
             {notifs.length > 0 ? (
@@ -49,7 +52,7 @@ const Notifications = () => {
                 ))}
               </div>
             ) : (
-              <div className="notif-empty"><span>🔔</span><p>Aucune notification</p></div>
+              <div className="notif-empty"><span>🔔</span><p>{t('notifications.empty')}</p></div>
             )}
           </div>
         </>

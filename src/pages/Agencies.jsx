@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { LuArrowLeft, LuMapPin, LuPhone, LuClock4 } from 'react-icons/lu';
 import { agencyService } from '../services/AgencyService';
 import './Agencies.css';
 
 const Agencies = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [agencies, setAgencies] = useState([]);
 
   useEffect(() => {
@@ -18,8 +20,8 @@ const Agencies = () => {
         <div className="agencies-header slide-up">
           <button className="vd-back" onClick={() => navigate(-1)}><LuArrowLeft /></button>
           <div>
-            <h1 className="agencies-title">Nos Agences</h1>
-            <p className="agencies-subtitle">{agencies.length} agences en France</p>
+            <h1 className="agencies-title">{t('agencies.title')}</h1>
+            <p className="agencies-subtitle">{agencies.length} {t('agencies.count')}</p>
           </div>
         </div>
         <div className="agencies-grid">

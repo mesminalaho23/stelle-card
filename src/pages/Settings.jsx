@@ -27,17 +27,17 @@ const Settings = () => {
     const newVal = !value;
     setter(newVal);
     localStorage.setItem(key, JSON.stringify(newVal));
-    toast.success('Paramètre mis à jour');
+    toast.success(t('common.settingUpdated'));
   };
 
   const handleClearData = () => {
-    if (window.confirm('Supprimer toutes les données locales ? (favoris, réservations, paramètres)')) {
+    if (window.confirm(t('settings.clearDataConfirm'))) {
       localStorage.removeItem('favorites');
       localStorage.removeItem('bookings');
       localStorage.removeItem('settings_notifications');
       localStorage.removeItem('settings_emailNotifs');
       localStorage.removeItem('settings_promoNotifs');
-      toast.success('Données supprimées');
+      toast.success(t('common.dataDeleted'));
     }
   };
 
@@ -52,11 +52,11 @@ const Settings = () => {
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
     if (newPwd.length < 6) {
-      toast.error('Le mot de passe doit contenir au moins 6 caractères');
+      toast.error(t('settings.passwordMinLength'));
       return;
     }
     if (newPwd !== confirmPwd) {
-      toast.error('Les mots de passe ne correspondent pas');
+      toast.error(t('settings.passwordMismatch'));
       return;
     }
     const success = changePassword(currentPwd, newPwd);
@@ -75,17 +75,17 @@ const Settings = () => {
           <button className="vd-back" onClick={() => navigate(-1)}>
             <LuArrowLeft />
           </button>
-          <h1 className="settings-title">Paramètres</h1>
+          <h1 className="settings-title">{t('settings.title')}</h1>
         </div>
 
         {/* Notifications */}
         <div className="settings-section slide-up">
-          <h3 className="settings-section-title"><LuBell /> Notifications</h3>
+          <h3 className="settings-section-title"><LuBell /> {t('settings.notifications')}</h3>
           
           <div className="settings-item">
             <div className="settings-item-info">
-              <span className="settings-item-label">Notifications push</span>
-              <span className="settings-item-desc">Recevoir des alertes sur votre appareil</span>
+              <span className="settings-item-label">{t('settings.pushNotifs')}</span>
+              <span className="settings-item-desc">{t('settings.pushNotifsDesc')}</span>
             </div>
             <button
               className={`settings-toggle ${notifications ? 'settings-toggle--on' : ''}`}
@@ -97,8 +97,8 @@ const Settings = () => {
 
           <div className="settings-item">
             <div className="settings-item-info">
-              <span className="settings-item-label">Notifications email</span>
-              <span className="settings-item-desc">Confirmations et rappels par email</span>
+              <span className="settings-item-label">{t('settings.emailNotifs')}</span>
+              <span className="settings-item-desc">{t('settings.emailNotifsDesc')}</span>
             </div>
             <button
               className={`settings-toggle ${emailNotifs ? 'settings-toggle--on' : ''}`}
@@ -110,8 +110,8 @@ const Settings = () => {
 
           <div className="settings-item">
             <div className="settings-item-info">
-              <span className="settings-item-label">Offres promotionnelles</span>
-              <span className="settings-item-desc">Recevoir les bons plans et réductions</span>
+              <span className="settings-item-label">{t('settings.promoNotifs')}</span>
+              <span className="settings-item-desc">{t('settings.promoNotifsDesc')}</span>
             </div>
             <button
               className={`settings-toggle ${promoNotifs ? 'settings-toggle--on' : ''}`}
@@ -124,12 +124,12 @@ const Settings = () => {
 
         {/* Appearance */}
         <div className="settings-section slide-up">
-          <h3 className="settings-section-title">{isDark ? '☀️' : '🌙'} Apparence</h3>
+          <h3 className="settings-section-title">{isDark ? '☀️' : '🌙'} {t('settings.appearance')}</h3>
           
           <div className="settings-item">
             <div className="settings-item-info">
-              <span className="settings-item-label">Mode sombre</span>
-              <span className="settings-item-desc">Adapter l'interface à votre préférence</span>
+              <span className="settings-item-label">{t('settings.darkMode')}</span>
+              <span className="settings-item-desc">{t('settings.darkModeDesc')}</span>
             </div>
             <button
               className={`settings-toggle ${isDark ? 'settings-toggle--on' : ''}`}
@@ -152,7 +152,7 @@ const Settings = () => {
           {showPasswordForm && (
             <form className="password-form slide-up" onSubmit={handlePasswordSubmit} style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <div className="form-group">
-                <label className="form-label">Mot de passe actuel</label>
+                <label className="form-label">{t('settings.currentPassword')}</label>
                 <div className="password-field">
                   <input type={showCurrentPwd ? 'text' : 'password'} className="form-input" value={currentPwd} onChange={e => setCurrentPwd(e.target.value)} required />
                   <button type="button" className="password-toggle" onClick={() => setShowCurrentPwd(!showCurrentPwd)}>
@@ -161,7 +161,7 @@ const Settings = () => {
                 </div>
               </div>
               <div className="form-group">
-                <label className="form-label">Nouveau mot de passe</label>
+                <label className="form-label">{t('settings.newPassword')}</label>
                 <div className="password-field">
                   <input type={showNewPwd ? 'text' : 'password'} className="form-input" value={newPwd} onChange={e => setNewPwd(e.target.value)} required minLength={6} />
                   <button type="button" className="password-toggle" onClick={() => setShowNewPwd(!showNewPwd)}>
@@ -170,7 +170,7 @@ const Settings = () => {
                 </div>
               </div>
               <div className="form-group">
-                <label className="form-label">Confirmer le nouveau mot de passe</label>
+                <label className="form-label">{t('settings.confirmNewPassword')}</label>
                 <div className="password-field">
                   <input type={showConfirmPwd ? 'text' : 'password'} className="form-input" value={confirmPwd} onChange={e => setConfirmPwd(e.target.value)} required />
                   <button type="button" className="password-toggle" onClick={() => setShowConfirmPwd(!showConfirmPwd)}>
@@ -178,17 +178,17 @@ const Settings = () => {
                   </button>
                 </div>
               </div>
-              <button type="submit" className="btn-primary">Enregistrer</button>
+              <button type="submit" className="btn-primary">{t('profile.save')}</button>
             </form>
           )}
         </div>
 
         {/* Data */}
         <div className="settings-section slide-up">
-          <h3 className="settings-section-title"><LuTrash2 /> Données</h3>
+          <h3 className="settings-section-title"><LuTrash2 /> {t('settings.data')}</h3>
           
           <button className="settings-action-btn settings-action-btn--danger" onClick={handleClearData}>
-            <span>Supprimer les données locales</span>
+            <span>{t('settings.clearData')}</span>
             <span className="menu-arrow">›</span>
           </button>
         </div>
@@ -198,11 +198,11 @@ const Settings = () => {
           <h3 className="settings-section-title"><LuInfo /> À propos</h3>
           <div className="settings-about">
             <div className="settings-about-row">
-              <span>Version</span>
+              <span>{t('settings.version')}</span>
               <span>1.0.0</span>
             </div>
             <div className="settings-about-row">
-              <span>Développé par</span>
+              <span>{t('settings.developedBy')}</span>
               <span>Stelle Card</span>
             </div>
           </div>

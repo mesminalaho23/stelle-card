@@ -1,58 +1,60 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { LuArrowLeft } from 'react-icons/lu';
 import './Legal.css';
 
-const faqItems = [
-  { q: 'Comment réserver un véhicule ?', a: 'Choisissez un véhicule, sélectionnez la durée et les dates, puis validez votre réservation.' },
-  { q: 'Puis-je annuler ma réservation ?', a: 'Oui, annulation gratuite jusqu\'à 24h avant la prise en charge depuis "Mes Réservations".' },
-  { q: 'Le chauffeur est-il inclus ?', a: 'Le chauffeur est une option avec un supplément de 30% sur le tarif de base.' },
-  { q: 'Quels documents sont nécessaires ?', a: 'Un permis de conduire valide, une pièce d\'identité et une carte bancaire au nom du conducteur.' },
-  { q: 'Y a-t-il une caution ?', a: 'Une empreinte de carte bancaire est requise. Montant : 500€ à 3000€ selon le véhicule.' },
-  { q: 'Comment contacter le support ?', a: 'Par téléphone au +33 1 42 56 78 90 (24/7), par email à support@stellecard.com, ou via le chat.' }
-];
-
 const Legal = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('faq');
   const [openFaq, setOpenFaq] = useState(null);
+
+  const faqItems = [
+    { q: t('legal.faq1q'), a: t('legal.faq1a') },
+    { q: t('legal.faq2q'), a: t('legal.faq2a') },
+    { q: t('legal.faq3q'), a: t('legal.faq3a') },
+    { q: t('legal.faq4q'), a: t('legal.faq4a') },
+    { q: t('legal.faq5q'), a: t('legal.faq5a') },
+    { q: t('legal.faq6q'), a: t('legal.faq6a') },
+  ];
 
   return (
     <div className="legal-page">
       <div className="container">
         <div className="legal-header slide-up">
           <button className="vd-back" onClick={() => navigate(-1)}><LuArrowLeft /></button>
-          <h1 className="legal-title">Informations légales</h1>
+          <h1 className="legal-title">{t('legal.title')}</h1>
         </div>
         <div className="legal-tabs slide-up">
-          {[{id:'cgu',label:'CGU'},{id:'privacy',label:'Confidentialité'},{id:'faq',label:'FAQ'}].map(tab => (
+          {[{id:'cgu',label:t('legal.cgu')},{id:'privacy',label:t('legal.privacy')},{id:'faq',label:t('legal.faq')}].map(tab => (
             <button key={tab.id} className={`legal-tab ${activeTab === tab.id ? 'legal-tab--active' : ''}`} onClick={() => setActiveTab(tab.id)}>{tab.label}</button>
           ))}
         </div>
         <div className="legal-content slide-up">
           {activeTab === 'cgu' && (
             <div className="legal-text">
-              <h2>Conditions Générales d'Utilisation</h2>
-              <p>Bienvenue sur Stelle Card. En utilisant notre service, vous acceptez les présentes conditions.</p>
-              <h3>1. Objet</h3><p>Stelle Card propose un service de location de véhicules avec ou sans chauffeur.</p>
-              <h3>2. Conditions de location</h3><p>Le locataire doit être âgé d'au moins 21 ans et titulaire d'un permis valide depuis 2 ans minimum. Un dépôt de garantie sera demandé.</p>
-              <h3>3. Tarification</h3><p>Les prix incluent l'assurance de base, le kilométrage illimité et l'assistance 24/7.</p>
-              <h3>4. Annulation</h3><p>Annulation gratuite plus de 24h avant. En deçà, frais de 50%.</p>
-              <h3>5. Responsabilité</h3><p>Le locataire est responsable du véhicule pendant toute la durée de la location.</p>
+              <h2>{t('legal.cguTitle')}</h2>
+              <p>{t('legal.cguIntro')}</p>
+              <h3>{t('legal.cguObj')}</h3><p>{t('legal.cguObjText')}</p>
+              <h3>{t('legal.cguConditions')}</h3><p>{t('legal.cguConditionsText')}</p>
+              <h3>{t('legal.cguPricing')}</h3><p>{t('legal.cguPricingText')}</p>
+              <h3>{t('legal.cguCancel')}</h3><p>{t('legal.cguCancelText')}</p>
+              <h3>{t('legal.cguResponsibility')}</h3><p>{t('legal.cguResponsibilityText')}</p>
             </div>
           )}
           {activeTab === 'privacy' && (
             <div className="legal-text">
-              <h2>Politique de Confidentialité</h2>
-              <p>Stelle Card s'engage à protéger vos données personnelles conformément au RGPD.</p>
-              <h3>Données collectées</h3><p>Nom, email, téléphone, permis de conduire et informations de paiement.</p>
-              <h3>Utilisation</h3><p>Gestion des réservations, communication et amélioration de la plateforme.</p>
-              <h3>Vos droits</h3><p>Accès, rectification, suppression et portabilité. Contact : privacy@stellecard.com.</p>
+              <h2>{t('legal.privacyTitle')}</h2>
+              <p>{t('legal.privacyIntro')}</p>
+              <h3>{t('legal.privacyData')}</h3><p>{t('legal.privacyDataText')}</p>
+              <h3>{t('legal.privacyUsage')}</h3><p>{t('legal.privacyUsageText')}</p>
+              <h3>{t('legal.privacyRights')}</h3><p>{t('legal.privacyRightsText')}</p>
             </div>
           )}
           {activeTab === 'faq' && (
             <div className="faq-list">
-              <h2>Questions fréquentes</h2>
+              <h2>{t('legal.faqTitle')}</h2>
               {faqItems.map((item, i) => (
                 <div key={i} className={`faq-item ${openFaq === i ? 'faq-item--open' : ''}`}>
                   <button className="faq-question" onClick={() => setOpenFaq(openFaq === i ? null : i)}>

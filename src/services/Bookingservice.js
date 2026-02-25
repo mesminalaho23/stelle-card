@@ -1,5 +1,6 @@
 import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, where, orderBy } from 'firebase/firestore';
 import { db } from './firebase';
+import i18n from '../i18n/i18n';
 
 const BOOKINGS_COL = 'bookings';
 
@@ -62,21 +63,21 @@ export const bookingService = {
 
   getDurationLabel: (duration) => {
     const labels = {
-      '24h': '24 heures',
-      '48h': '48 heures',
-      '1week': '1 semaine',
-      '1month': '1 mois'
+      '24h': i18n.t('duration.24hours'),
+      '48h': i18n.t('duration.48hours'),
+      '1week': i18n.t('duration.1week'),
+      '1month': i18n.t('duration.1month')
     };
     return labels[duration] || duration;
   },
 
   getStatusInfo: (status) => {
     const statusMap = {
-      pending: { label: 'En attente', color: 'warning' },
-      confirmed: { label: 'Confirmée', color: 'success' },
-      active: { label: 'En cours', color: 'primary' },
-      completed: { label: 'Terminée', color: 'success' },
-      cancelled: { label: 'Annulée', color: 'danger' }
+      pending: { label: i18n.t('status.pending'), color: 'warning' },
+      confirmed: { label: i18n.t('status.confirmed'), color: 'success' },
+      active: { label: i18n.t('status.active'), color: 'primary' },
+      completed: { label: i18n.t('status.completed'), color: 'success' },
+      cancelled: { label: i18n.t('status.cancelled'), color: 'danger' }
     };
     return statusMap[status] || { label: status, color: 'secondary' };
   }

@@ -16,7 +16,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const { user, logout, updateProfile, isAuthenticated, isAdmin } = useAuth();
   const { isDark, toggleTheme } = useTheme();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [activeSection, setActiveSection] = useState(null);
   const [editName, setEditName] = useState(user?.name || '');
   const [editPhone, setEditPhone] = useState(user?.phone || '');
@@ -53,13 +53,13 @@ const Profile = () => {
 
   // Menu → section or action
   const menuItems = [
-    { icon: 'ℹ️', label: 'Mes Informations', section: 'info' },
-    { icon: '📍', label: 'Mes Réservations', route: '/my-rentals' },
-    { icon: '🌐', label: 'Langue / Language', value: languages.find(l => l.code === currentLang)?.flag, section: 'language' },
-    { icon: isDark ? '☀️' : '🌙', label: isDark ? 'Mode clair' : 'Mode sombre', action: toggleTheme },
-    { icon: '⚙️', label: 'Paramètres', route: '/settings' },
-    ...(isAdmin ? [{ icon: '🔧', label: 'Administration', route: '/admin' }] : []),
-    { icon: '🚪', label: 'Déconnexion', action: handleLogout, danger: true }
+    { icon: 'ℹ️', label: t('profile.myInfo'), section: 'info' },
+    { icon: '📍', label: t('profile.myBookings'), route: '/my-rentals' },
+    { icon: '🌐', label: t('profile.language'), value: languages.find(l => l.code === currentLang)?.flag, section: 'language' },
+    { icon: isDark ? '☀️' : '🌙', label: isDark ? t('profile.lightMode') : t('profile.darkMode'), action: toggleTheme },
+    { icon: '⚙️', label: t('profile.settings'), route: '/settings' },
+    ...(isAdmin ? [{ icon: '🔧', label: t('profile.admin'), route: '/admin' }] : []),
+    { icon: '🚪', label: t('profile.logout'), action: handleLogout, danger: true }
   ];
 
   const handleMenuClick = (item) => {
@@ -106,7 +106,7 @@ const Profile = () => {
             />
           </div>
           <div className="profile-info">
-            <h2 className="profile-name">{user?.name || 'Utilisateur'}</h2>
+            <h2 className="profile-name">{user?.name || t('profile.user')}</h2>
             <p className="profile-email">{user?.email || ''}</p>
           </div>
         </div>
@@ -134,7 +134,7 @@ const Profile = () => {
               {item.section === 'info' && activeSection === 'info' && (
                 <div className="profile-section slide-up">
                   <div className="form-group">
-                    <label className="form-label">Nom complet</label>
+                    <label className="form-label">{t('profile.fullName')}</label>
                     <input
                       type="text"
                       className="form-input"
@@ -143,7 +143,7 @@ const Profile = () => {
                     />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Email</label>
+                    <label className="form-label">{t('profile.email')}</label>
                     <input
                       type="email"
                       className="form-input"
@@ -152,7 +152,7 @@ const Profile = () => {
                     />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Téléphone</label>
+                    <label className="form-label">{t('profile.phone')}</label>
                     <input
                       type="tel"
                       className="form-input"
@@ -161,7 +161,7 @@ const Profile = () => {
                     />
                   </div>
                   <button className="btn-primary" onClick={handleSaveInfo}>
-                    Enregistrer
+                    {t('profile.save')}
                   </button>
                 </div>
               )}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { LuArrowLeft, LuHeart, LuUsers, LuBriefcase, LuCog, LuDroplets, LuNavigation, LuShare2, LuSend, LuStar } from 'react-icons/lu';
 import { getVehicleById } from '../services/vehicleService';
 import toast from 'react-hot-toast';
@@ -7,20 +8,21 @@ import { useBooking } from '../contexts/BookingContext';
 import { useFavorites } from '../contexts/FavoritesContext';
 import './VehicleDetails.css';
 
-const durationOptions = [
-  { label: 'Jour', key: '24h' },
-  { label: '48h', key: '48h' },
-  { label: '1 Semaine', key: '1week' },
-  { label: '1 Mois', key: '1month' }
-];
-
 const VehicleDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const { t, i18n } = useTranslation();
   const vehicle = getVehicleById(id);
   const { setVehicle } = useBooking();
   const [selectedDuration, setSelectedDuration] = useState('24h');
   const { isFavorite, toggleFavorite } = useFavorites();
+
+  const durationOptions = [
+    { label: t('compare.day'), key: '24h' },
+    { label: '48h', key: '48h' },
+    { label: `1 ${t('compare.week')}`, key: '1week' },
+    { label: `1 ${t('compare.month')}`, key: '1month' }
+  ];
 
   const [userReviews, setUserReviews] = useState(() => {
     const stored = localStorage.getItem(`reviews_${id}`);
@@ -32,7 +34,7 @@ const VehicleDetails = () => {
 
   const handleSubmitReview = () => {
     if (!reviewText.trim() || reviewRating === 0) {
-      toast.error('Veuillez écrire un avis et donner une note');
+      toast.error(t('review.error'));
       return;
     }
     const newReview = {
@@ -48,7 +50,7 @@ const VehicleDetails = () => {
     localStorage.setItem(`reviews_${id}`, JSON.stringify(updated));
     setReviewText('');
     setReviewRating(0);
-    toast.success('Merci pour votre avis !');
+    toast.success(t('review.thanks'));
   };
 
   if (!vehicle) {
@@ -57,10 +59,10 @@ const VehicleDetails = () => {
         <div className="container">
           <div className="vd-not-found slide-up">
             <span>🚫</span>
-            <h2>Véhicule introuvable</h2>
-            <p>Ce véhicule n'existe pas ou a été retiré.</p>
+            <h2>{t('vehicles.notFound')}</h2>
+            <p>{t('vehicles.notFoundDesc')}</p>
             <button className="btn-primary" onClick={() => navigate('/vehicles')}>
-              Voir tous les véhicules
+              {t('vehicles.seeAll')}
             </button>
           </div>
         </div>
@@ -69,11 +71,11 @@ const VehicleDetails = () => {
   }
 
   const specItems = [
-    { icon: <LuUsers />, label: `${vehicle.specs.passengers} Passagers` },
-    { icon: <LuBriefcase />, label: `${vehicle.specs.luggage} Bagages` },
+    { icon: <LuUsers />, label: `${vehicle.specs.passengers} ${t('vehicles.passengers')}` },
+    { icon: <LuBriefcase />, label: `${vehicle.specs.luggage} ${t('vehicles.luggage')}` },
     { icon: <LuCog />, label: vehicle.specs.transmission },
     { icon: <LuDroplets />, label: vehicle.specs.fuel },
-    { icon: <LuNavigation />, label: `${vehicle.specs.doors} Portes` }
+    { icon: <LuNavigation />, label: `${vehicle.specs.doors} ${t('vehicles.doors')}` }
   ];
 
   return (
@@ -87,10 +89,10 @@ const VehicleDetails = () => {
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <button className="vd-fav" onClick={() => {
               if (navigator.share) {
-                navigator.share({ title: vehicle.name, text: `${vehicle.name} sur Stelle Card — ${vehicle.price['24h']}€/jour`, url: window.location.href });
+                navigator.share({ title: vehicle.name, text: `${vehicle.name} sur Stelle Card — ${vehicle.price['24h']}€${t('vehicles.perDay')}`, url: window.location.href });
               } else {
                 navigator.clipboard.writeText(window.location.href);
-                import('react-hot-toast').then(m => m.default.success('Lien copié !'));
+                import('react-hot-toast').then(m => m.default.success(t('common.linkCopied')));
               }
             }}>
               <LuShare2 />
@@ -107,9 +109,9 @@ const VehicleDetails = () => {
             <img src={vehicle.image} alt={vehicle.name} className="vd-hero-img" />
             <div className="vd-hero-overlay">
               {vehicle.available ? (
-                <span className="badge badge-green">DISPONIBLE</span>
+                <span className="badge badge-green">{t('vehicles.available')}</span>
               ) : (
-                <span className="badge badge-red">INDISPONIBLE</span>
+                <span className="badge badge-red">{t('vehicles.unavailable')}</span>
               )}
             </div>
           </div>
@@ -135,7 +137,7 @@ const VehicleDetails = () => {
 
             {/* Features */}
             <div className="vd-features">
-              <h3 className="vd-section-title">Équipements</h3>
+              <h3 className="vd-section-title">{t('vehicles.equipment')}</h3>
               <div className="vd-features-list">
                 {vehicle.features.map((feat, i) => (
                   <span key={i} className="vd-feature-tag">✓ {feat}</span>
@@ -147,27 +149,27 @@ const VehicleDetails = () => {
             {vehicle.withDriver && (
               <div className="vd-driver-badge">
                 <span>🚗</span>
-                <span>Chauffeur disponible sur demande</span>
+                <span>{t('vehicles.driverAvailable')}</span>
               </div>
             )}
 
             {/* Laisser un avis */}
             <div className="vd-reviews">
-              <h3 className="vd-section-title">Laisser un avis</h3>
+              <h3 className="vd-section-title">{t('review.leaveReview')}</h3>
               <div className="vd-review-form">
                 <div className="vd-review-type-toggle">
                   <button
                     className={`vd-review-type-btn ${reviewType === 'vehicle' ? 'vd-review-type-btn--active' : ''}`}
                     onClick={() => setReviewType('vehicle')}
                   >
-                    🚗 Véhicule
+                    🚗 {t('review.vehicle')}
                   </button>
                   {vehicle.withDriver && (
                     <button
                       className={`vd-review-type-btn ${reviewType === 'driver' ? 'vd-review-type-btn--active' : ''}`}
                       onClick={() => setReviewType('driver')}
                     >
-                      👤 Chauffeur
+                      👤 {t('review.driver')}
                     </button>
                   )}
                 </div>
@@ -185,20 +187,20 @@ const VehicleDetails = () => {
                 </div>
                 <textarea
                   className="form-input vd-review-textarea"
-                  placeholder={reviewType === 'vehicle' ? 'Votre avis sur ce véhicule...' : 'Votre avis sur le chauffeur...'}
+                  placeholder={reviewType === 'vehicle' ? t('review.placeholder') : t('review.driverPlaceholder')}
                   value={reviewText}
                   onChange={(e) => setReviewText(e.target.value)}
                   rows={3}
                 />
                 <button className="btn-primary vd-review-submit" onClick={handleSubmitReview}>
                   <LuSend size={16} />
-                  Publier l'avis
+                  {t('review.submit')}
                 </button>
               </div>
 
               {userReviews.length > 0 && (
                 <>
-                  <h3 className="vd-section-title" style={{ marginTop: '1.5rem' }}>Avis clients ({userReviews.length})</h3>
+                  <h3 className="vd-section-title" style={{ marginTop: '1.5rem' }}>{t('review.clientReviews')} ({userReviews.length})</h3>
                   <div className="vd-reviews-list">
                     {userReviews.map((review) => (
                       <div key={review.id} className="vd-review">
@@ -206,10 +208,10 @@ const VehicleDetails = () => {
                           <div className="vd-review-avatar">{review.user.charAt(0)}</div>
                           <div className="vd-review-meta">
                             <span className="vd-review-user">{review.user}</span>
-                            <span className="vd-review-date">{new Date(review.date).toLocaleDateString('fr-FR')}</span>
+                            <span className="vd-review-date">{new Date(review.date).toLocaleDateString(i18n.language === 'fr' ? 'fr-FR' : 'en-US')}</span>
                           </div>
                           <span className="vd-review-type-tag">
-                            {review.type === 'driver' ? '👤 Chauffeur' : '🚗 Véhicule'}
+                            {review.type === 'driver' ? `👤 ${t('review.driver')}` : `🚗 ${t('review.vehicle')}`}
                           </span>
                         </div>
                         <div className="vd-review-stars">
@@ -227,7 +229,7 @@ const VehicleDetails = () => {
 
             {/* Pricing */}
             <div className="vd-pricing">
-              <h3 className="vd-section-title">Tarifs</h3>
+              <h3 className="vd-section-title">{t('vehicles.pricing')}</h3>
               <div className="vd-duration-bar">
                 {durationOptions.map((dur) => (
                   <button
@@ -251,7 +253,7 @@ const VehicleDetails = () => {
               onClick={() => { setVehicle(vehicle, selectedDuration); navigate('/booking'); }}
               disabled={!vehicle.available}
             >
-              {vehicle.available ? `Réserver — ${vehicle.price[selectedDuration]}€` : 'Indisponible'}
+              {vehicle.available ? `${t('vehicles.reserve')} — ${vehicle.price[selectedDuration]}€` : t('vehicles.unavailable')}
             </button>
           </div>
         </div>

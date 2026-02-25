@@ -103,7 +103,7 @@ const Home = () => {
                 <LuCalendarDays className="field-icon" />
                 <input
                   type="date"
-                  placeholder="Date de début"
+                  placeholder={t('home.startDate')}
                   value={searchData.startDate}
                   onChange={(e) => setSearchData({ ...searchData, startDate: e.target.value })}
                 />
@@ -113,7 +113,7 @@ const Home = () => {
                 <LuCalendarDays className="field-icon" />
                 <input
                   type="date"
-                  placeholder="Date de fin"
+                  placeholder={t('home.endDate')}
                   value={searchData.endDate}
                   onChange={(e) => setSearchData({ ...searchData, endDate: e.target.value })}
                 />

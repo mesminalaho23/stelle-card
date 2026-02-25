@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { LuUsers, LuZap, LuHeart } from 'react-icons/lu';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { useFavorites } from '../contexts/FavoritesContext';
 import './VehicleCard.css';
 
@@ -18,6 +19,7 @@ const VehicleCard = ({ vehicle, index = 0 }) => {
   } = vehicle;
 
   const { isFavorite, toggleFavorite } = useFavorites();
+  const { t } = useTranslation();
 
   return (
     <motion.div
@@ -37,7 +39,7 @@ const VehicleCard = ({ vehicle, index = 0 }) => {
             </span>
             {!available && (
               <span className="badge badge-danger">
-                Non disponible
+                {t('vehicles.notAvailable')}
               </span>
             )}
           </div>
@@ -62,7 +64,7 @@ const VehicleCard = ({ vehicle, index = 0 }) => {
           <div className="vehicle-specs">
             <div className="spec-item">
               <LuUsers className="spec-icon" />
-              <span>{specs.passengers} places</span>
+              <span>{specs.passengers} {t('vehicles.places')}</span>
             </div>
             <div className="spec-item">
               <LuZap className="spec-icon" />
@@ -74,7 +76,7 @@ const VehicleCard = ({ vehicle, index = 0 }) => {
           {withDriver && (
             <div className="driver-badge">
               <span>🚗</span>
-              <span>Avec chauffeur disponible</span>
+              <span>{t('vehicles.withDriver')}</span>
             </div>
           )}
 
@@ -82,10 +84,10 @@ const VehicleCard = ({ vehicle, index = 0 }) => {
           <div className="vehicle-card-footer">
             <div className="vehicle-price">
               <span className="price-amount">{price['24h']}€</span>
-              <span className="price-period">/jour</span>
+              <span className="price-period">{t('vehicles.perDay')}</span>
             </div>
             <span className="view-btn">
-              Voir détails →
+              {t('vehicles.viewDetails')}
             </span>
           </div>
         </div>

@@ -1,28 +1,30 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import './Locations.css';
 
 const Locations = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const locations = [
     {
       id: 1,
-      status: 'En cours',
+      status: t('locations.inProgress'),
       vehicle: 'Audi Q5',
       dates: '20 Apr - 25 May',
       price: '€285,00',
       image: '🚙',
-      badge: 'En cours'
+      badge: t('locations.inProgress')
     },
     {
       id: 2,
-      status: 'Terminée',
+      status: t('locations.completed'),
       vehicle: 'Renault Clio',
       dates: '10 Apr - 12 Apr',
       price: '€110,00',
       image: '🚗',
-      badge: 'Terminée'
+      badge: t('locations.completed')
     }
   ];
 
@@ -43,7 +45,7 @@ const Locations = () => {
         <button className="back-button" onClick={() => navigate(-1)}>
           ←
         </button>
-        <h1 className="page-title">Mes Locations</h1>
+        <h1 className="page-title">{t('locations.title')}</h1>
         <div style={{ width: '40px' }}></div>
       </div>
 
@@ -58,7 +60,7 @@ const Locations = () => {
             >
               <div className="location-header">
                 <h3 className="location-status">{location.status}</h3>
-                <span className={`badge ${location.status === 'En cours' ? 'badge-blue' : 'badge-green'}`}>
+                <span className={`badge ${location.status === t('locations.inProgress') ? 'badge-blue' : 'badge-green'}`}>
                   {location.badge}
                 </span>
               </div>
